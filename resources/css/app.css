@@ -495,6 +495,18 @@
     @media (min-width: 768px) { .rail-card { width: 20rem; } }
     @media (min-width: 1280px) { .rail-card { width: 22rem; } }
 
+    /* Scroll affordance. The rail's arrows were removed, so below the width
+       where three cards stop overflowing (1071px for this card width) the
+       right edge fades out to advertise that there is more to see. Pure CSS
+       so it survives with JavaScript off. Re-measure this boundary if the
+       number of team members or the card width changes. */
+    @media (max-width: 1070px) {
+        .rail {
+            -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 3.5rem), transparent 100%);
+            mask-image: linear-gradient(to right, #000 calc(100% - 3.5rem), transparent 100%);
+        }
+    }
+
     /* --- Cards -------------------------------------------------------- */
     .card {
         background: var(--color-bone-50);

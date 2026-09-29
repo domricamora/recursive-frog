@@ -213,30 +213,21 @@
          ============================================================ --}}
     @if ($team->isNotEmpty())
         <section class="rule-b bg-bone-100 py-20 md:py-28">
-            <div class="shell" data-rail>
-                <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-                    <div>
-                        <x-eyebrow :number="str_pad((string) $team->count(), 2, '0', STR_PAD_LEFT)">
-                            People
-                        </x-eyebrow>
-                        <h2 class="display display-2 mt-6 max-w-2xl">
-                            A small team that finishes what it starts.
-                        </h2>
-                    </div>
-
-                    <div class="flex shrink-0 gap-3">
-                        <button type="button" data-rail-prev class="circ-btn text-ink-900" aria-label="Previous people">
-                            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                                <path d="M13 8H4m0 0 3.2-3.2M4 8l3.2 3.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <button type="button" data-rail-next class="circ-btn text-ink-900" aria-label="Next people">
-                            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                                <path d="M3 8h9m0 0-3.2-3.2M12 8l-3.2 3.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
+            <div class="shell">
+                <div>
+                    <x-eyebrow :number="str_pad((string) $team->count(), 2, '0', STR_PAD_LEFT)">
+                        People
+                    </x-eyebrow>
+                    <h2 class="display display-2 mt-6 max-w-2xl">
+                        A small team that finishes what it starts.
+                    </h2>
                 </div>
+
+                {{-- No prev/next arrows. The team is small enough that the
+                     cards all fit from 1071px up, and below that the rail is
+                     a plain overflow scroller driven by touch, trackpad and
+                     keyboard. The edge fade in app.css is what signals there
+                     is more to scroll to. --}}
 
                 <div class="rail mt-12 -mx-5 px-5 md:-mx-10 md:px-10 xl:-mx-14 xl:px-14">
                     @foreach ($team as $member)

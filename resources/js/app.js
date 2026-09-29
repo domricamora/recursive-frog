@@ -166,41 +166,6 @@ function initFilms() {
     });
 }
 
-/**
- * Carousel rails. The markup ships plain overflow-x scrollers, so the buttons
- * simply nudge scrollLeft — no carousel library, and the rail still works with
- * a trackpad, touch or keyboard if JavaScript never runs.
- */
-function initRails() {
-    document.querySelectorAll('[data-rail]').forEach((wrap) => {
-        const rail = wrap.querySelector('.rail');
-        if (!rail) return;
-
-        const step = () => {
-            const card = rail.querySelector(':scope > *');
-            return card ? card.getBoundingClientRect().width + 16 : rail.clientWidth * 0.8;
-        };
-
-        const update = () => {
-            const max = rail.scrollWidth - rail.clientWidth - 2;
-            wrap.querySelectorAll('[data-rail-prev]').forEach((b) => { b.disabled = rail.scrollLeft <= 2; });
-            wrap.querySelectorAll('[data-rail-next]').forEach((b) => { b.disabled = rail.scrollLeft >= max; });
-        };
-
-        wrap.querySelectorAll('[data-rail-prev]').forEach((button) => {
-            button.addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: 'smooth' }));
-        });
-
-        wrap.querySelectorAll('[data-rail-next]').forEach((button) => {
-            button.addEventListener('click', () => rail.scrollBy({ left: step(), behavior: 'smooth' }));
-        });
-
-        rail.addEventListener('scroll', update, { passive: true });
-        window.addEventListener('resize', update);
-        update();
-    });
-}
-
 /** Live Manila clock for the top-left pill. */
 function initClock() {
     const nodes = document.querySelectorAll('[data-clock]');
@@ -268,7 +233,6 @@ function boot() {
     seedAttribution();
     initReveals();
     initFilms();
-    initRails();
     initClock();
     initScrollReadout();
 
