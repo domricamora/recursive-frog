@@ -1,0 +1,843 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+/* =====================================================================
+   Recursive Frog — editorial design system
+   ---------------------------------------------------------------------
+   A warm paper-and-ink system: cream canvas, near-black type, hairline
+   rules, pill controls and full-bleed film. Jade is the only accent and
+   is used sparingly so the page still reads as one considered system.
+   ===================================================================== */
+
+@theme {
+    --font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --font-sign: 'Caveat', 'Segoe Script', cursive;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    /* Paper — the default canvas. */
+    --color-bone-50: #fcfaf6;
+    --color-bone-100: #f5f2eb;
+    --color-bone-200: #ebe6db;
+    --color-bone-300: #ded7c8;
+    --color-bone-400: #c8c0af;
+
+    /* Ink — warm near-blacks, never pure #000. */
+    --color-ink-950: #0b0b08;
+    --color-ink-900: #121210;
+    --color-ink-850: #171713;
+    --color-ink-800: #1f1f1a;
+    --color-ink-700: #2c2c25;
+    --color-ink-600: #414137;
+    --color-ink-500: #5f5f53;
+    --color-ink-400: #87877a;
+    --color-ink-300: #adada0;
+    --color-ink-200: #cdcdc2;
+
+    /* Jade — the single accent. */
+    --color-jade-200: #b6f0d8;
+    --color-jade-300: #5fe0ae;
+    --color-jade-400: #12b886;
+    --color-jade-500: #0e9c6e;
+    --color-jade-600: #0a7a56;
+    --color-jade-700: #075b40;
+    --color-jade-900: #05291c;
+
+    /* Brass — used for rare emphasis, never for body copy. */
+    --color-brass-300: #e3c894;
+    --color-brass-400: #c39a52;
+    --color-brass-500: #9a7738;
+
+    --color-brick-400: #c0503a;
+    --color-brick-500: #a23d29;
+
+    /* ---------------------------------------------------------------
+       Legacy aliases.
+       The pre-redesign views referenced a navy/mist/pearl palette. Those
+       names are remapped onto paper/ink so any markup that has not been
+       migrated yet still renders inside the new system instead of
+       fighting it. Remove a group once its views are fully ported.
+       --------------------------------------------------------------- */
+    --color-navy-50: var(--color-bone-50);
+    --color-navy-100: var(--color-bone-100);
+    --color-navy-200: var(--color-bone-200);
+    --color-navy-600: var(--color-bone-300);
+    --color-navy-700: var(--color-bone-300);
+    --color-navy-750: var(--color-bone-300);
+    --color-navy-800: var(--color-bone-200);
+    --color-navy-850: var(--color-bone-100);
+    --color-navy-900: var(--color-bone-100);
+    --color-navy-950: var(--color-bone-50);
+
+    --color-mist-50: var(--color-ink-900);
+    --color-mist-100: var(--color-ink-900);
+    --color-mist-200: var(--color-ink-800);
+    --color-mist-300: var(--color-ink-600);
+    --color-mist-400: var(--color-ink-500);
+    --color-mist-500: var(--color-ink-400);
+    --color-mist-600: var(--color-ink-400);
+    --color-mist-700: var(--color-ink-300);
+
+    --color-pearl-50: var(--color-bone-50);
+    --color-pearl-100: var(--color-bone-100);
+    --color-pearl-200: var(--color-bone-200);
+    --color-pearl-900: var(--color-ink-900);
+
+    --color-rose-ish: var(--color-brick-400);
+    --color-amber-ish: var(--color-brass-400);
+    --color-sky-400: var(--color-ink-500);
+
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+    :root {
+        --shell: 84rem;
+        --hairline: color-mix(in oklab, var(--color-ink-900) 14%, transparent);
+        --hairline-soft: color-mix(in oklab, var(--color-ink-900) 8%, transparent);
+    }
+
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+
+    body {
+        background-color: var(--color-bone-100);
+        color: var(--color-ink-700);
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+
+    h1, h2, h3, h4, h5 {
+        font-family: var(--font-display);
+        color: var(--color-ink-900);
+        font-weight: 600;
+        line-height: 1.02;
+        letter-spacing: -0.035em;
+        text-wrap: balance;
+    }
+
+    p { text-wrap: pretty; }
+
+    /* The chrome is fixed, so anything jumped to has to clear it. */
+    :target,
+    [id] { scroll-margin-top: 6rem; }
+
+    ::selection {
+        background: var(--color-jade-300);
+        color: var(--color-ink-950);
+    }
+
+    * { scrollbar-color: var(--color-bone-400) var(--color-bone-100); }
+
+    :focus-visible {
+        outline: 2px solid var(--color-jade-500);
+        outline-offset: 3px;
+        border-radius: 4px;
+    }
+
+    [x-cloak] { display: none !important; }
+}
+
+@layer components {
+    /* --- Layout ------------------------------------------------------ */
+    .shell {
+        width: 100%;
+        max-width: var(--shell);
+        margin-inline: auto;
+        padding-inline: 1.25rem;
+    }
+
+    @media (min-width: 768px) { .shell { padding-inline: 2.5rem; } }
+    @media (min-width: 1280px) { .shell { padding-inline: 3.5rem; } }
+
+    /* Full-bleed content that still respects the page gutter. */
+    .shell-flush {
+        width: 100%;
+        max-width: 112rem;
+        margin-inline: auto;
+        padding-inline: 1.25rem;
+    }
+
+    @media (min-width: 768px) { .shell-flush { padding-inline: 2.5rem; } }
+    @media (min-width: 1280px) { .shell-flush { padding-inline: 3.5rem; } }
+
+    .rule { border-top: 1px solid var(--hairline); }
+    .rule-b { border-bottom: 1px solid var(--hairline); }
+
+    /* --- Typography --------------------------------------------------- */
+
+    /* The signature display size: a tight, confident stack of two or three
+       short lines sitting hard against the left edge. */
+    .display {
+        font-family: var(--font-display);
+        font-weight: 600;
+        line-height: 0.94;
+        letter-spacing: -0.04em;
+        color: var(--color-ink-900);
+    }
+
+    .display-1 { font-size: clamp(2.9rem, 8.2vw, 7.5rem); }
+    .display-2 { font-size: clamp(2.4rem, 5.6vw, 4.75rem); }
+    .display-3 { font-size: clamp(1.9rem, 3.6vw, 3rem); }
+    .display-4 { font-size: clamp(1.5rem, 2.4vw, 2rem); letter-spacing: -0.03em; }
+
+    /* Full-bleed film keeps its type white regardless of section colour. */
+    .on-film { color: #fff; }
+    .on-film h1, .on-film h2, .on-film h3, .on-film h4 { color: #fff; }
+
+    /* Display and statement type is often set on non-heading elements over
+       film (a card label, a pull quote), so it has to be told explicitly. */
+    .on-film .display,
+    .on-film .statement,
+    .on-film .sign { color: #fff; }
+
+    /* The editorial serif line that sits between two dark statements. */
+    .statement {
+        font-family: var(--font-serif);
+        font-weight: 400;
+        line-height: 1.06;
+        letter-spacing: -0.02em;
+        color: var(--color-ink-900);
+    }
+
+    .statement-1 { font-size: clamp(1.85rem, 4.1vw, 3.4rem); }
+    .statement-2 { font-size: clamp(1.4rem, 2.5vw, 2.1rem); }
+
+    .meta {
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        line-height: 1.4;
+    }
+
+    .eyebrow {
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        line-height: 1.4;
+        color: var(--color-ink-400);
+    }
+
+    .on-film .eyebrow { color: color-mix(in oklab, #fff 65%, transparent); }
+
+    /* Signature hand, used under a person's name. */
+    .sign {
+        font-family: var(--font-sign);
+        font-size: 1.6rem;
+        line-height: 1;
+        color: var(--color-ink-900);
+    }
+
+    /* Underlined text link with a rule that redraws on hover. */
+    .link-rule {
+        position: relative;
+        display: inline-block;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .link-rule::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -0.1em;
+        height: 1px;
+        background: currentColor;
+        opacity: 0.55;
+        transition: opacity 240ms var(--ease-out-expo), transform 240ms var(--ease-out-expo);
+    }
+
+    .link-rule:hover::after { opacity: 1; }
+
+    /* --- Buttons ------------------------------------------------------ */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        font-family: var(--font-display);
+        font-weight: 500;
+        font-size: 0.9375rem;
+        line-height: 1;
+        letter-spacing: -0.01em;
+        padding: 0.95rem 1.6rem;
+        border-radius: 9999px;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 220ms, color 220ms, border-color 220ms,
+            transform 220ms var(--ease-out-expo);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary { background: var(--color-ink-900); color: var(--color-bone-50); }
+    .btn-primary:hover { background: var(--color-ink-700); }
+
+    .btn-accent { background: var(--color-jade-400); color: var(--color-ink-950); }
+    .btn-accent:hover { background: var(--color-jade-300); }
+
+    .btn-outline { border-color: var(--hairline); color: var(--color-ink-900); background: transparent; }
+    .btn-outline:hover { border-color: var(--color-ink-900); }
+
+    .btn-ghost { border-color: var(--hairline); color: var(--color-ink-700); background: var(--color-bone-50); }
+    .btn-ghost:hover { border-color: var(--color-ink-400); color: var(--color-ink-900); }
+
+    /* On film, buttons invert to a translucent plate. */
+    .on-film .btn-ghost {
+        border-color: color-mix(in oklab, #fff 35%, transparent);
+        color: #fff;
+        background: color-mix(in oklab, #fff 8%, transparent);
+        backdrop-filter: blur(10px);
+    }
+
+    .on-film .btn-ghost:hover { background: #fff; color: var(--color-ink-900); }
+    .on-film .btn-primary { background: #fff; color: var(--color-ink-900); }
+    .on-film .btn-primary:hover { background: var(--color-bone-200); }
+
+    .btn-sm { padding: 0.65rem 1.15rem; font-size: 0.8125rem; }
+    .btn-lg { padding: 1.15rem 2.1rem; font-size: 1.0625rem; }
+
+    /* --- Pills & chips ------------------------------------------------ */
+    .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-radius: 9999px;
+        border: 1px solid currentColor;
+        padding: 0.4rem 0.9rem;
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        line-height: 1;
+    }
+
+    .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        line-height: 1;
+        padding: 0.4rem 0.75rem;
+        border-radius: 9999px;
+        border: 1px solid var(--hairline);
+        color: var(--color-ink-600);
+        background: transparent;
+    }
+
+    .chip-accent {
+        border-color: color-mix(in oklab, var(--color-jade-500) 45%, transparent);
+        color: var(--color-jade-700);
+        background: color-mix(in oklab, var(--color-jade-300) 16%, transparent);
+    }
+
+    .chip-ink {
+        border-color: color-mix(in oklab, #fff 30%, transparent);
+        color: color-mix(in oklab, #fff 88%, transparent);
+    }
+
+    /* --- Circled numeral, the counter that labels every section -------- */
+    .circled {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.15rem;
+        height: 2.15rem;
+        border-radius: 9999px;
+        border: 1px solid currentColor;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        line-height: 1;
+        color: var(--color-ink-900);
+        font-variant-numeric: tabular-nums;
+        flex: none;
+    }
+
+    .on-film .circled { color: #fff; }
+
+    .circ-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 9999px;
+        border: 1px solid currentColor;
+        color: inherit;
+        background: transparent;
+        flex: none;
+        transition: background-color 220ms, color 220ms, opacity 220ms;
+    }
+
+    .circ-btn:hover { background: var(--color-ink-900); color: var(--color-bone-50); border-color: var(--color-ink-900); }
+    .on-film .circ-btn:hover { background: #fff; color: var(--color-ink-900); border-color: #fff; }
+    .circ-btn[disabled] { opacity: 0.28; pointer-events: none; }
+
+    /* --- Full-bleed film ---------------------------------------------- */
+    .film {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background-color: var(--color-ink-900);
+    }
+
+    .film-media,
+    .film-poster {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -2;
+    }
+
+    /* The poster sits under the video and crossfades out once frames arrive. */
+    .film-media { opacity: 0; transition: opacity 900ms var(--ease-out-expo); }
+    .film-media[data-state='playing'] { opacity: 1; }
+
+    /* Vertical scrim keeps type legible over any frame. */
+    .film-scrim {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(
+            to top,
+            color-mix(in oklab, var(--color-ink-950) 80%, transparent) 0%,
+            color-mix(in oklab, var(--color-ink-950) 42%, transparent) 32%,
+            color-mix(in oklab, var(--color-ink-950) 6%, transparent) 60%,
+            color-mix(in oklab, var(--color-ink-950) 36%, transparent) 100%
+        );
+    }
+
+    .film-scrim-soft {
+        background: linear-gradient(
+            to top,
+            color-mix(in oklab, var(--color-ink-950) 72%, transparent) 0%,
+            color-mix(in oklab, var(--color-ink-950) 24%, transparent) 46%,
+            color-mix(in oklab, var(--color-ink-950) 20%, transparent) 100%
+        );
+    }
+
+    .film-tint {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: color-mix(in oklab, var(--color-ink-950) var(--tint, 30%), transparent);
+    }
+
+    /* Grain keeps large flat fields from banding. */
+    .film-grain::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        opacity: 0.16;
+        mix-blend-mode: overlay;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    }
+
+    /* --- Horizontal rail (carousel) ----------------------------------- */
+    .rail-wrap { position: relative; }
+
+    .rail {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        scroll-padding-inline: 1.25rem;
+    }
+
+    .rail::-webkit-scrollbar { display: none; }
+    .rail > * { scroll-snap-align: start; flex: none; }
+
+    .rail-card { width: min(78vw, 22rem); }
+
+    @media (min-width: 768px) { .rail-card { width: 20rem; } }
+    @media (min-width: 1280px) { .rail-card { width: 22rem; } }
+
+    /* --- Cards -------------------------------------------------------- */
+    .card {
+        background: var(--color-bone-50);
+        border: 1px solid var(--hairline);
+        border-radius: 1rem;
+        transition: border-color 260ms, transform 260ms var(--ease-out-expo);
+    }
+
+    .card:hover { border-color: color-mix(in oklab, var(--color-ink-900) 32%, transparent); }
+
+    .card-lift:hover { transform: translateY(-4px); }
+
+    /* A cream plate laid over a film still, as used by the closing CTA. It has
+       to win back ink from the .on-film rules that surround it. */
+    .plate {
+        background: var(--color-bone-50);
+        color: var(--color-ink-700);
+        border-radius: 0.5rem;
+    }
+
+    .on-film .plate h1,
+    .on-film .plate h2,
+    .on-film .plate h3,
+    .on-film .plate h4,
+    .on-film .plate .display,
+    .on-film .plate .statement { color: var(--color-ink-900); }
+
+    .on-film .plate .eyebrow { color: var(--color-ink-400); }
+    .on-film .plate .circ-btn { color: var(--color-ink-900); border-color: var(--hairline); }
+    .on-film .plate .circ-btn:hover { background: var(--color-ink-900); color: var(--color-bone-50); }
+
+    /* Buttons on the plate are ink, not the inverted film treatment — a white
+       button on cream would simply disappear. */
+    .on-film .plate .btn-primary { background: var(--color-ink-900); color: var(--color-bone-50); }
+    .on-film .plate .btn-primary:hover { background: var(--color-ink-700); }
+    .on-film .plate .btn-accent { background: var(--color-jade-400); color: var(--color-ink-950); }
+    .on-film .plate .btn-outline { background: transparent; color: var(--color-ink-900); border-color: var(--hairline); }
+    .on-film .plate .btn-outline:hover { border-color: var(--color-ink-900); }
+
+    /* --- Forms -------------------------------------------------------- */
+    .field {
+        width: 100%;
+        background: var(--color-bone-50);
+        border: 1px solid var(--hairline);
+        border-radius: 0.5rem;
+        padding: 0.8rem 1rem;
+        color: var(--color-ink-900);
+        font-family: var(--font-sans);
+        font-size: 0.9375rem;
+        line-height: 1.5;
+        transition: border-color 180ms, box-shadow 180ms, background-color 180ms;
+    }
+
+    .field::placeholder { color: var(--color-ink-300); }
+    .field:hover { border-color: color-mix(in oklab, var(--color-ink-900) 26%, transparent); }
+
+    .field:focus {
+        outline: none;
+        border-color: var(--color-ink-900);
+        background: #fff;
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-jade-400) 26%, transparent);
+    }
+
+    .field[aria-invalid='true'] { border-color: var(--color-brick-400); }
+    .field:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    select.field {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%235f5f53' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.9rem center;
+        background-size: 12px;
+        padding-right: 2.4rem;
+    }
+
+    textarea.field { min-height: 8rem; resize: vertical; }
+
+    .label {
+        display: block;
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--color-ink-500);
+        margin-bottom: 0.5rem;
+    }
+
+    .error {
+        display: block;
+        margin-top: 0.4rem;
+        font-size: 0.8125rem;
+        color: var(--color-brick-500);
+    }
+
+    /* Checkbox and radio get an accent that matches the brand. */
+    .check {
+        width: 1.1rem;
+        height: 1.1rem;
+        border-radius: 0.25rem;
+        border: 1px solid var(--hairline);
+        accent-color: var(--color-jade-500);
+        flex: none;
+    }
+
+    /* --- Tables ------------------------------------------------------- */
+    .table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+
+    .table th {
+        text-align: left;
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--color-ink-500);
+        font-weight: 400;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--hairline);
+        white-space: nowrap;
+    }
+
+    .table td {
+        padding: 0.9rem 1rem;
+        border-bottom: 1px solid var(--hairline-soft);
+        vertical-align: top;
+    }
+
+    .table tbody tr { transition: background-color 180ms; }
+    .table tbody tr:hover { background: color-mix(in oklab, var(--color-bone-200) 55%, transparent); }
+
+    /* --- Top chrome (clock · wordmark · contact) ----------------------- */
+    .chrome {
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 60;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+        transition: background-color 400ms, border-color 400ms, backdrop-filter 400ms;
+        border-bottom: 1px solid transparent;
+    }
+
+    .chrome[data-stuck='true'] {
+        background: color-mix(in oklab, var(--color-bone-50) 82%, transparent);
+        backdrop-filter: blur(16px) saturate(1.3);
+        border-bottom-color: var(--hairline);
+    }
+
+    /* The wordmark sits in a floating cream lozenge at the top centre. */
+    .wordmark-plate {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: var(--color-bone-50);
+        color: var(--color-ink-900);
+        border-radius: 9999px;
+        padding: 0.5rem 0.6rem 0.5rem 1.1rem;
+        box-shadow: 0 2px 20px -6px rgb(0 0 0 / 0.18);
+    }
+
+    /* Monogram disc, used for team member initials on the home page. The
+       brand itself is the <x-logo> / <x-logo-mark> traced artwork, not type. */
+    .monogram {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.6rem;
+        height: 2.6rem;
+        border-radius: 9999px;
+        border: 1px solid currentColor;
+        font-family: var(--font-display);
+        font-size: 0.8125rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        flex: none;
+    }
+
+    /* The ruler: a fine ticked strip that measures the page. */
+    .ruler {
+        width: 1px;
+        background-image: repeating-linear-gradient(
+            to bottom,
+            color-mix(in oklab, currentColor 35%, transparent) 0 1px,
+            transparent 1px 10px
+        );
+    }
+
+    /* Vertical wordmark running up the side of the footer. */
+    .vertical-mark {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        font-family: var(--font-display);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        line-height: 0.82;
+        white-space: nowrap;
+    }
+
+    /* --- Motion -------------------------------------------------------- */
+    .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: opacity 900ms var(--ease-out-expo), transform 900ms var(--ease-out-expo);
+    }
+
+    .reveal.is-visible { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+        .reveal { opacity: 1; transform: none; }
+    }
+
+    /* Marquee for the trust strip. */
+    .marquee { overflow: hidden; mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+
+    .marquee-track {
+        display: flex;
+        width: max-content;
+        gap: 3.5rem;
+        animation: rf-marquee 38s linear infinite;
+    }
+
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+
+    @keyframes rf-marquee { to { transform: translateX(-50%); } }
+
+    @media (prefers-reduced-motion: reduce) {
+        .marquee-track { animation: none; }
+    }
+}
+
+@layer components {
+    /* --- Compatibility bridge -----------------------------------------
+       Class names still referenced by views that have not been ported to
+       the editorial system yet. They are re-expressed in the new palette
+       so nothing renders off-system. Retire each as its views migrate.
+       ------------------------------------------------------------------ */
+    .panel {
+        background: var(--color-bone-50);
+        border: 1px solid var(--hairline);
+        border-radius: 1rem;
+    }
+
+    .script {
+        font-family: var(--font-sign);
+        line-height: 1;
+        color: var(--color-ink-900);
+    }
+
+    .serif-italic {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 400;
+    }
+
+    .rf-grid {
+        background-image:
+            linear-gradient(to right, color-mix(in oklab, var(--color-ink-900) 5%, transparent) 1px, transparent 1px),
+            linear-gradient(to bottom, color-mix(in oklab, var(--color-ink-900) 5%, transparent) 1px, transparent 1px);
+        background-size: 90px 90px;
+    }
+
+    .rf-dots {
+        background-image: radial-gradient(color-mix(in oklab, var(--color-ink-900) 14%, transparent) 1px, transparent 1px);
+        background-size: 22px 22px;
+    }
+
+    .rf-glow {
+        position: absolute;
+        border-radius: 9999px;
+        filter: blur(120px);
+        pointer-events: none;
+    }
+
+    .rf-grain::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.05;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    }
+
+    .icon-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 9999px;
+        border: 1px solid var(--hairline);
+        color: var(--color-ink-900);
+        flex: none;
+    }
+
+    .stat-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem 2rem;
+        border-radius: 1rem;
+        border: 1px solid var(--hairline);
+        background: var(--color-bone-50);
+    }
+
+    .stat + .stat { padding-left: 1.5rem; border-left: 1px solid var(--hairline); }
+
+    /* Signature divider: line · dot · line */
+    .divider-dot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        color: var(--color-ink-300);
+    }
+
+    .divider-dot::before,
+    .divider-dot::after {
+        content: '';
+        height: 1px;
+        width: 5rem;
+        background: currentColor;
+    }
+
+    .divider-dot > span {
+        width: 5px;
+        height: 5px;
+        border-radius: 9999px;
+        background: var(--color-jade-400);
+    }
+}
+
+@layer utilities {
+    .tnum { font-variant-numeric: tabular-nums; }
+
+    .stack-1 > * + * { margin-top: 0.25rem; }
+    .stack-2 > * + * { margin-top: 0.5rem; }
+    .stack-3 > * + * { margin-top: 0.75rem; }
+    .stack-4 > * + * { margin-top: 1rem; }
+    .stack-6 > * + * { margin-top: 1.5rem; }
+    .stack-8 > * + * { margin-top: 2rem; }
+    .stack-12 > * + * { margin-top: 3rem; }
+
+    /* Keeps film type readable where it overhangs a tall image. */
+    .text-shadow-soft { text-shadow: 0 1px 24px rgb(0 0 0 / 0.35); }
+}
+
+
+
+
+
+
