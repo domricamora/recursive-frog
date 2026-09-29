@@ -35,9 +35,10 @@
         </div>
 
         {{-- The centred lockup doubles as the menu trigger. It sits inside the
-             button as plain SVG rather than an <x-logo> link, because a nested
-             anchor inside a button is invalid and gets hoisted out of it. The
-             mark is decorative here; the button is named by its sr-only text. --}}
+             button as a plain span rather than an <x-logo> link, because a
+             nested anchor inside a button is invalid and gets hoisted out of
+             it. The mark is decorative here; the button is named by its
+             sr-only text. --}}
         <div class="flex justify-center">
             <button type="button"
                     data-menu-open
@@ -45,7 +46,7 @@
                     :aria-expanded="open"
                     aria-controls="site-menu"
                     class="wordmark-plate">
-                <x-logo class="h-7 w-auto" />
+                <x-logo class="h-6" text-class="text-[0.9375rem] text-ink-900" decorative />
                 <span class="text-[0.75rem] font-medium leading-none text-ink-400" aria-hidden="true">®</span>
                 <span class="flex h-6 w-6 items-center justify-center" aria-hidden="true">
                     <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none">

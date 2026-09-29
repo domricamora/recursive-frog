@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="noindex, nofollow">
     <title>@yield('title', 'Admin') — {{ config('app.name') }}</title>
-    <link rel="icon" href="{{ asset('img/favicon.svg') }}" type="image/svg+xml">
+    <link rel="icon" href="{{ asset('img/recursivefrog-logo.png') }}" type="image/png">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-full bg-bone-100 text-ink-700 antialiased">
@@ -15,7 +15,7 @@
         <aside class="hidden w-64 shrink-0 flex-col border-r border-ink-900/10 bg-bone-50 lg:flex">
             <div class="flex h-16 items-center gap-2.5 border-b border-ink-900/10 px-5">
                 <a href="{{ route('admin.dashboard') }}" class="text-ink-900">
-                    <x-logo class="h-6 w-auto" />
+                    <x-logo class="h-6" text-class="text-[0.9375rem] text-ink-900" />
                 </a>
                 <span class="meta ml-auto text-ink-400">Admin</span>
             </div>
@@ -76,7 +76,7 @@
         {{-- Content --}}
         <div class="flex min-w-0 flex-1 flex-col">
             <header class="flex items-center gap-4 border-b border-ink-900/10 bg-bone-50 px-5 py-3.5 lg:hidden">
-                <x-logo-mark class="h-6 w-6 text-ink-900" />
+                <x-logo-mark class="h-6" label="Recursive Frog" />
                 <span class="font-display text-sm font-semibold text-ink-900">Admin</span>
                 <div class="ml-auto flex gap-2">
                     <a href="{{ route('home') }}" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Site</a>

@@ -18,7 +18,7 @@
 
     <div class="relative flex items-center justify-between px-5 py-5 md:px-10">
         <a href="{{ route('home') }}" class="inline-flex items-center text-white" aria-label="{{ $site['name'] ?? 'Recursive Frog' }} — home">
-            <x-logo class="h-7 w-auto" />
+            <x-logo class="h-7" text-class="text-[1rem] text-white" decorative />
         </a>
         <button type="button" @click="open = false" class="circ-btn" aria-label="Close menu">
             <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">

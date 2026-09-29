@@ -44,7 +44,7 @@ class Seo
             'email' => Site::email(),
             'telephone' => Site::phone(),
             'description' => Site::get('seo_description'),
-            'logo' => asset('img/logo-mark.svg'),
+            'logo' => asset('img/recursivefrog-logo.png'),
             'address' => [
                 '@type' => 'PostalAddress',
                 'addressLocality' => Site::get('city'),

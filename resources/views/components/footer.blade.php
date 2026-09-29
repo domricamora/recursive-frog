@@ -9,7 +9,7 @@
             <div class="hidden shrink-0 items-stretch gap-6 lg:flex xl:gap-10">
                 <div class="flex flex-col items-center gap-6 py-14">
                     <a href="{{ route('home') }}" class="text-bone-100 transition-opacity hover:opacity-70" aria-label="{{ $site['name'] }} — home">
-                        <x-logo-mark class="h-10 w-10" />
+                        <x-logo-mark class="h-9" label="{{ $site['name'] }}" />
                     </a>
 
                     {{-- writing-mode rotates the element's own axes, so it will

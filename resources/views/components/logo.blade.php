@@ -1,34 +1,30 @@
-@props(['class' => 'h-7 w-auto', 'label' => null])
+@props(['class' => 'h-7', 'textClass' => null, 'tag' => 'span', 'decorative' => false])
 
-{{-- The full Recursive Frog lockup, inlined from public/img/logo.svg.
+{{-- The Recursive Frog lockup: the supplied PNG mark set beside the
+     typographic wordmark.
 
-     Inlining rather than <img> is what keeps fill="currentColor" meaningful,
-     so one asset works on the ink hero, the cream interior pages and the
-     admin chrome without needing a second colourway. The intrinsic
-     width/height are stripped so CSS owns the size and the aspect ratio
-     still holds.
+     The PNG is used exactly as delivered — no tracing, no recolouring, no
+     re-encoding — so the artwork that was approved is the artwork that ships.
+     Because it is a raster carrying its own jade, it cannot inherit
+     currentColor the way a traced SVG would, so on dark grounds the wordmark
+     carries the contrast and the mark is left at its native colour.
 
-     Regenerate with:
-       node storage/app/shot/logo.mjs <source.png> public/img 3 --}}
-@php
-    $svg = (string) file_get_contents(public_path('img/logo.svg'));
-    $svg = preg_replace('/\s(?:width|height)="\d+"/', '', $svg);
+     Pass :decorative="true" where something else already names the element
+     (a link with an aria-label, or a button with its own sr-only text), so
+     screen readers do not announce the wordmark twice. --}}
+<{{ $tag }} {{ $attributes->merge([
+        'class' => 'inline-flex items-center gap-2.5 align-middle',
+    ]) }} @if ($decorative) aria-hidden="true" @endif>
+    <img src="{{ asset('img/recursivefrog-logo.png') }}"
+         alt=""
+         class="{{ $class }} w-auto shrink-0 select-none"
+         width="159"
+         height="130"
+         decoding="async">
 
-    // ->class() returns the whole bag, so pull the merged class value back out
-    $svg = preg_replace(
-        '/<svg /',
-        '<svg class="' . e($attributes->class($class)->get('class')) . '" ',
-        $svg,
-        1,
-    );
+    <span @class([
+        'display leading-none tracking-[-0.03em]',
+        $textClass ?? 'text-[1.0625rem]',
+    ])>RecursiveFrog</span>
+</{{ $tag }}>
 
-    // strip the asset's own labelling, then apply exactly one of our own:
-    // a label when the logo is the only wordmark, otherwise decorative
-    $svg = str_replace(' aria-label="Recursive Frog"', '', $svg);
-    $svg = str_replace(
-        ' role="img"',
-        $label ? ' role="img" aria-label="' . e($label) . '"' : ' aria-hidden="true"',
-        $svg,
-    );
-@endphp
-{!! $svg !!}

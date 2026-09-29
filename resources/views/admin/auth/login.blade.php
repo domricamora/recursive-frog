@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <title>Sign in — {{ config('app.name') }}</title>
-    <link rel="icon" href="{{ asset('img/favicon.svg') }}" type="image/svg+xml">
+    <link rel="icon" href="{{ asset('img/recursivefrog-logo.png') }}" type="image/png">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-full bg-bone-100 text-ink-700 antialiased">
@@ -14,8 +14,9 @@
     <main class="relative flex min-h-screen items-center justify-center p-6">
         <div class="w-full max-w-sm">
             <div class="text-center">
+                {{-- The lockup is the only wordmark here, so it names itself. --}}
                 <h1 class="mx-auto w-fit text-ink-900">
-                    <x-logo class="h-9 w-auto" label="Recursive Frog" />
+                    <x-logo class="h-10" tag="span" text-class="text-[1.375rem] text-ink-900" />
                 </h1>
                 <p class="meta mt-2 text-ink-400">Admin sign in</p>
             </div>

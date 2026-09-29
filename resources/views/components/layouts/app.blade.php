@@ -32,7 +32,7 @@
     <meta name="twitter:description" content="{{ $seo['description'] }}">
     <meta name="twitter:image" content="{{ asset($seo['image']) }}">
 
-    <link rel="icon" href="{{ asset('img/favicon.svg') }}" type="image/svg+xml">
+    <link rel="icon" href="{{ asset('img/recursivefrog-logo.png') }}" type="image/png">
 
     {{-- Structured data (plan.md #29) --}}
     @foreach (array_filter([$organisationSchema ?? null, $faqSchema ?? null, $breadcrumbSchema ?? null]) as $schema)
