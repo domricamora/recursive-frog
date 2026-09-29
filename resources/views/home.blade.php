@@ -4,7 +4,7 @@
          1. Hero — plan.md #6. Full-bleed film, headline hard to the
             left edge, one invitation in the bottom right.
          ============================================================ --}}
-    <x-film-panel clip="hero" height="min-h-[100svh] md:min-h-[92svh]" position="center 45%">
+    <x-film-panel clip="hero" height="min-h-[100svh]" position="center 45%">
         <div class="shell-flush relative flex flex-1 flex-col justify-end pb-14 pt-32 md:pb-20">
             <h1 class="display display-1 max-w-[16ch]">
                 <span class="reveal block" data-reveal-order="0">Build.</span>
