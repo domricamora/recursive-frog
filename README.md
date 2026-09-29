@@ -1,58 +1,137 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Recursive Frog
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Marketing and lead-capture site for Recursive Frog, a digital systems studio
+for aesthetics clinics in Cebu. Public marketing pages plus a password-guarded
+admin panel for managing tiers, projects, FAQs, team profiles, leads and site
+settings.
 
-## About Laravel
+Built on Laravel 13 with Vite and Tailwind CSS 4.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Where to log in
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The admin panel lives at **`/admin`**. It is not linked from the public
+navigation — go to the URL directly.
 
-## Learning Laravel
+| | URL |
+|---|---|
+| **Production** | `https://recursivefrog.deskpulse.click/admin` |
+| **Local** | `http://localhost:8000/admin` |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+`/admin` redirects to `/admin/login` when you are signed out. After signing in
+you land on the dashboard.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Accounts
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+`database/seeders/AdminUserSeeder.php` creates four accounts, **all with the
+placeholder password `password`**:
 
-## Agentic Development
+| Email | Role | Can reach |
+|---|---|---|
+| `nick@recursivefrog.ph` | `admin` | Everything, including Settings and Audit log |
+| `sales@recursivefrog.ph` | `editor` | Tiers, projects, FAQs, team |
+| `front@recursivefrog.ph` | `editor` | Tiers, projects, FAQs, team |
+| `tech@recursivefrog.ph` | `editor` | Tiers, projects, FAQs, team |
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+> **Change these before the site goes live.** The seeded password is in version
+> control. Set a real password for `nick@recursivefrog.ph` and delete the three
+> editor accounts you do not need, then confirm the panel is no longer
+> reachable with `password`.
+
+### Admin sections
+
+| Path | Purpose |
+|---|---|
+| `/admin` | Dashboard |
+| `/admin/leads` | Contact submissions, notes, CSV export |
+| `/admin/services` | Service tiers and their features |
+| `/admin/projects` | Portfolio projects and case studies |
+| `/admin/faqs` | FAQ entries |
+| `/admin/team` | Team profiles |
+| `/admin/settings` | Company details, contact info, analytics IDs — `admin` only |
+| `/admin/audit-log` | Change history — `admin` only |
+
+The login page is `noindex, nofollow` and `/admin` is disallowed in
+`robots.txt`, so the panel is kept out of search results.
+
+---
+
+## About this project
+
+The public site and the admin panel are the only two entry points. Everything a
+visitor reads — tiers, work, FAQs, team, contact details — comes from MySQL via
+the admin panel rather than from templates, so copy and content changes do not
+require a deploy.
+
+## Local setup
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Create the database, then:
 
-## Contributing
+```bash
+php artisan migrate --seed
+npm run dev          # or: npm run build
+php artisan serve
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Requires PHP 8.3+ and MySQL 8 / MariaDB 10.6+.
 
-## Code of Conduct
+## Tests
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+php artisan test
+```
 
-## Security Vulnerabilities
+There is also a route-level smoke check that boots the kernel and requests
+every public route:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php smoke.php              # public routes
+php smoke.php --admin      # public + authenticated admin routes
+php smoke.php /contact     # a single route
+```
 
-## License
+## Deploying
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The app expects the document root to point at `public/`. On hosts where that
+cannot be configured (shared cPanel subdomain folders), the repository ships an
+`.htaccess` strategy that serves the app from the domain root while keeping
+`app/`, `config/`, `storage/`, `vendor/` and dotfiles unreachable.
+
+After uploading:
+
+```bash
+composer install --no-dev --optimize-autoloader
+php artisan migrate --force
+php artisan db:seed --force
+php artisan config:cache && php artisan route:cache && php artisan view:cache
+```
+
+`public/build/` is git-ignored, so compiled assets must be built and uploaded
+separately — the server needs Node for `npm run build`.
+
+## Configuration
+
+Site-wide details (company name, tagline, email, phone, address, map embed)
+are set under **Admin → Settings** and stored in `site_settings`. Those values
+override the `SITE_*` environment defaults at runtime.
+
+Optional integrations stay inert until their environment variables are set:
+
+| Variable | Effect |
+|---|---|
+| `HUBSPOT_ACCESS_TOKEN`, `HUBSPOT_PORTAL_ID` | Push new leads to the CRM |
+| `GA4_MEASUREMENT_ID`, `GTM_CONTAINER_ID` | Analytics and tag management |
+| `MAIL_MAILER`, `MAIL_HOST`, `MAIL_USERNAME`, `MAIL_PASSWORD` | Deliver lead emails instead of logging them |
+
+## Credits
+
+Background film is from [Mixkit](https://mixkit.co/free-license-video/) under
+the Mixkit Free License. See `MEDIA-CREDITS.md`.
