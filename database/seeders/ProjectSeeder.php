@@ -42,6 +42,7 @@ class ProjectSeeder extends Seeder
             [
                 'name' => 'Cover & Keys',
                 'slug' => 'cover-and-keys',
+                'thumbnail' => 'media/work/cover-and-keys.webp',
                 'category' => 'Booking platform',
                 'summary' => 'A booking platform for stays and restaurants across the Philippines.',
                 'overview' => 'A booking platform covering stays and restaurants across the Philippines, with payment and host '
@@ -66,6 +67,7 @@ class ProjectSeeder extends Seeder
             [
                 'name' => 'RGE Hotel',
                 'slug' => 'rge-hotel',
+                'thumbnail' => 'media/work/rge-hotel.webp',
                 'category' => 'Booking engine',
                 'summary' => 'Booking engine with Xendit payments and a role-based back office.',
                 'overview' => 'A hotel booking engine with Xendit payments and a back office that organises staff access by role.',
@@ -92,6 +94,7 @@ class ProjectSeeder extends Seeder
             [
                 'name' => 'VirtuaCore',
                 'slug' => 'virtuacore',
+                'thumbnail' => 'media/work/virtuacore.webp',
                 'category' => 'Brand site',
                 'summary' => 'Brand site featuring an animated WebGL2 homepage.',
                 'overview' => 'A brand site whose homepage is an animated WebGL2 experience — proof that a marketing site can carry '
@@ -111,6 +114,7 @@ class ProjectSeeder extends Seeder
             [
                 'name' => 'DeskPulse',
                 'slug' => 'deskpulse',
+                'thumbnail' => 'media/work/deskpulse.webp',
                 'category' => 'Multi-tenant SaaS',
                 'summary' => 'Multi-tenant time-tracking SaaS built on Laravel.',
                 'overview' => 'A multi-tenant time-tracking SaaS built on Laravel, where each organisation works inside its own '
@@ -138,6 +142,7 @@ class ProjectSeeder extends Seeder
             [
                 'name' => 'Paid Media Manager',
                 'slug' => 'paid-media-manager',
+                'thumbnail' => 'media/work/paid-media-manager.webp',
                 'category' => 'AI-assisted tooling',
                 'summary' => 'AI-assisted suggestions where Claude drafts recommendations and a person approves every change.',
                 'overview' => 'A paid media management tool where Claude drafts recommendations and a person reviews and approves '
@@ -158,6 +163,7 @@ class ProjectSeeder extends Seeder
             [
                 'name' => 'VT Payroll Automation',
                 'slug' => 'vt-payroll-automation',
+                'thumbnail' => 'media/work/vt-payroll-automation.webp',
                 'category' => 'Automation',
                 'summary' => 'Imports tracker data, calculates pay and emails payslips.',
                 'overview' => 'An automation that removes the monthly payroll chore: it imports time-tracking data, calculates the '
@@ -178,6 +184,7 @@ class ProjectSeeder extends Seeder
             [
                 'name' => 'Virtual Teammate',
                 'slug' => 'virtual-teammate',
+                'thumbnail' => 'media/work/virtual-teammate.webp',
                 'category' => 'CRM and analytics',
                 'summary' => 'HubSpot workflows and GA4 lead tracking.',
                 'overview' => 'A lightweight operations layer that keeps HubSpot workflows running and GA4 lead tracking honest, '

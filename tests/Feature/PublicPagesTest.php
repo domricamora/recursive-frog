@@ -132,4 +132,39 @@ class PublicPagesTest extends TestCase
             ->assertSee('AI does admin only', false)
             ->assertSee('AI does not diagnose', false);
     }
+
+    public function test_a_project_with_a_thumbnail_renders_the_image(): void
+    {
+        Project::create([
+            'name' => 'Cover & Keys',
+            'slug' => 'cover-and-keys',
+            'summary' => 'A booking platform.',
+            'thumbnail' => 'media/work/cover-and-keys.webp',
+            'featured' => true,
+        ]);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('media/work/cover-and-keys.webp', false)
+            // A real screenshot carries meaning, so it is not decorative.
+            ->assertSee('alt="Screenshot of Cover &amp; Keys"', false)
+            // Dimensions are declared so the card does not shift on load.
+            ->assertSee('width="1200"', false)
+            ->assertSee('height="750"', false);
+    }
+
+    public function test_a_project_without_a_thumbnail_falls_back_to_the_abstract_map(): void
+    {
+        Project::create([
+            'name' => 'No Artwork Yet',
+            'slug' => 'no-artwork',
+            'summary' => 'Still being documented.',
+            'featured' => true,
+        ]);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertDontSee('Screenshot of No Artwork', false)
+            ->assertSee('rf-grid', false);
+    }
 }

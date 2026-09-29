@@ -1,27 +1,52 @@
 @props(['project', 'index' => null])
 
 <article class="card group relative flex h-full flex-col overflow-hidden">
-    {{-- An abstract "system map" stands in for a screenshot: nodes and links
-         that echo the brand rather than a generic grey placeholder. --}}
-    <div class="relative h-44 overflow-hidden border-b border-ink-900/10 bg-bone-200" aria-hidden="true">
-        <div class="rf-grid absolute inset-0 opacity-70"></div>
-        <div class="rf-glow right-[-3rem] top-[-4rem] h-40 w-56 bg-jade-400/20"></div>
+    {{-- Real screenshots where one exists, with the abstract "system map"
+         kept as the fallback so a project without artwork still looks
+         deliberate. --}}
+    <div class="relative h-44 shrink-0 overflow-hidden border-b border-ink-900/10 bg-bone-200">
+        @if ($project->thumbnail)
+            <img
+                src="{{ asset($project->thumbnail) }}"
+                alt="Screenshot of {{ $project->name }}"
+                width="1200"
+                height="750"
+                loading="lazy"
+                decoding="async"
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            >
+            {{-- A top-weighted scrim rather than the full-bleed film scrim: the
+                 film scrim darkens the whole frame, which drains the colour
+                 out of real screenshots. This only covers the chip row and
+                 fades out before the artwork reads. --}}
+            <span
+                class="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-ink-950/70 via-ink-950/25 to-transparent"
+                aria-hidden="true"
+            ></span>
+        @else
+            <div class="absolute inset-0" aria-hidden="true">
+                <div class="rf-grid absolute inset-0 opacity-70"></div>
+                <div class="rf-glow right-[-3rem] top-[-4rem] h-40 w-56 bg-jade-400/20"></div>
 
-        <svg class="absolute inset-0 h-full w-full" viewBox="0 0 400 176" fill="none">
-            <path d="M40 118 C 120 118, 130 44, 210 56 S 320 126, 366 50" stroke="var(--color-ink-900)" stroke-opacity=".28" stroke-width="1.2"/>
-            <path d="M40 58 C 110 58, 140 132, 214 114 S 320 48, 366 118" stroke="var(--color-jade-500)" stroke-opacity=".55" stroke-width="1.2"/>
-            <circle cx="40" cy="118" r="4" fill="var(--color-ink-900)"/>
-            <circle cx="40" cy="58" r="3" fill="var(--color-ink-900)" fill-opacity=".45"/>
-            <circle cx="210" cy="56" r="3" fill="var(--color-ink-900)" fill-opacity=".45"/>
-            <circle cx="214" cy="114" r="4" fill="var(--color-jade-500)"/>
-            <circle cx="366" cy="50" r="4" fill="var(--color-ink-900)"/>
-            <circle cx="366" cy="118" r="3" fill="var(--color-ink-900)" fill-opacity=".45"/>
-        </svg>
+                <svg class="absolute inset-0 h-full w-full" viewBox="0 0 400 176" fill="none">
+                    <path d="M40 118 C 120 118, 130 44, 210 56 S 320 126, 366 50" stroke="var(--color-ink-900)" stroke-opacity=".28" stroke-width="1.2"/>
+                    <path d="M40 58 C 110 58, 140 132, 214 114 S 320 48, 366 118" stroke="var(--color-jade-500)" stroke-opacity=".55" stroke-width="1.2"/>
+                    <circle cx="40" cy="118" r="4" fill="var(--color-ink-900)"/>
+                    <circle cx="40" cy="58" r="3" fill="var(--color-ink-900)" fill-opacity=".45"/>
+                    <circle cx="210" cy="56" r="3" fill="var(--color-ink-900)" fill-opacity=".45"/>
+                    <circle cx="214" cy="114" r="4" fill="var(--color-jade-500)"/>
+                    <circle cx="366" cy="50" r="4" fill="var(--color-ink-900)"/>
+                    <circle cx="366" cy="118" r="3" fill="var(--color-ink-900)" fill-opacity=".45"/>
+                </svg>
+            </div>
+        @endif
 
         <div class="absolute left-4 top-4 flex flex-wrap gap-2">
-            <span class="chip">{{ $project->category }}</span>
+            {{-- chip-ink, because the chips now sit on arbitrary artwork
+                 rather than the light bone-200 the default chip was drawn for. --}}
+            <span class="chip chip-ink">{{ $project->category }}</span>
             @if ($project->year)
-                <span class="chip tnum">{{ $project->year }}</span>
+                <span class="chip chip-ink tnum">{{ $project->year }}</span>
             @endif
         </div>
     </div>
