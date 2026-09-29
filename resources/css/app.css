@@ -482,6 +482,14 @@
     .rail::-webkit-scrollbar { display: none; }
     .rail > * { scroll-snap-align: start; flex: none; }
 
+    /* Centre the cards whenever the rail has room to spare.
+       Auto margins rather than `justify-content: center`: a centred
+       overflowing flex scroller can push its first item past the start
+       edge where it cannot be scrolled to, while auto margins collapse
+       to 0 the moment the content overflows and hand the scrolling back. */
+    .rail > *:first-child { margin-inline-start: auto; }
+    .rail > *:last-child { margin-inline-end: auto; }
+
     .rail-card { width: min(78vw, 22rem); }
 
     @media (min-width: 768px) { .rail-card { width: 20rem; } }
