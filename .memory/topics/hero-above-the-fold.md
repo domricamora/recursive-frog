@@ -1,0 +1,5 @@
+# Hero Above The Fold
+
+- 2026-09-30 — Homepage hero now fills the full above-the-fold. Cause was the panel, not the video: `.film-media`/`.film-poster` already had `inset: 0; width/height: 100%; object-fit: cover` and measured as filling their panel. The real cause was `md:min-h-[92svh]` on the `x-film-panel` `height` prop in `resources/views/home.blade.php`, which left 72px (1440x900) and 82px (768x1024) of the next section above the fold. Changed to `min-h-[100svh]`. Mobile was already 100%, so the `md:` override was the whole bug.
+- 2026-09-30 — At 1280x720 the hero is 733px, not 720px: the panel's *content* exceeds 100svh and `min-height` lets content win. Not a regression, no visual gap, but a short-viewport fit would need padding trimmed at short heights rather than another height change.
+- 2026-09-30 — Measurement lesson: `document.querySelector('.film')` returns the menu overlay, not the hero, because the overlay is also `.film on-film` and comes first in the DOM. Scope hero probes to the `.film` containing an `h1` with height > 200.

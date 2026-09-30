@@ -1,0 +1,6 @@
+# Htaccess Csp Config
+
+- 2026-09-30 — The repo copy of `.htaccess` had lost all 59 line breaks and was a single 3200-byte line with zero CR and zero LF. Production had the correct 59-line version, which is why the site stayed healthy: Apache parses newlines-optional config, so the one-liner worked fine. Restored from a byte-safe `scp` copy of production and verified the directive content was semantically identical (2751 chars after whitespace normalisation) before committing. Now hash-matches production.
+- 2026-09-30 — Why this mattered despite a working site: the repo copy is the deploy source, so the next `.htaccess` upload would have replaced the readable production file with a one-liner, and every future diff/merge against it would have been meaningless.
+- 2026-09-30 — `'unsafe-eval'` in the CSP is load-bearing, not sloppy. Alpine's expression evaluator uses `new Function()`; without it every `x-show`/`x-bind`/`@click` silently fails to evaluate and the menu overlay renders *open over the whole page*. Removing the tracked `.htaccess` override will break the menu. The strict alternative is the `@alpinejs/csp` build, which drops expression support and needs the templates rewritten.
+- 2026-09-30 — The shared host sets its own CSP with `Header always set`, so the app's values must be re-asserted in `.htaccess` to win.

@@ -190,7 +190,7 @@
         <section class="bg-bone-50">
             <div class="shell py-20 md:py-28">
                 <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-                    <x-section-heading title="Real platforms. Built by Nick." class="max-w-xl" />
+                    <x-section-heading title="Real platforms. Built by us." class="max-w-xl" />
                     <a href="{{ route('work.index') }}" data-track-cta="work_all" class="link-rule shrink-0 text-ink-900">
                         See all projects
                     </a>

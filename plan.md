@@ -399,7 +399,7 @@ CTA:
 
 ## Heading
 
-> **Real platforms. Built by Nick.**
+> **Real platforms. Built by us.**
 
 Use project cards with:
 
