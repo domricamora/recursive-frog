@@ -15,6 +15,19 @@ return [
 
     'company_name' => env('SITE_COMPANY_NAME', 'Recursive Frog'),
 
+    // The subdomain this site is published on, and therefore the identity every
+    // deploy is checked against. Recursive Frog shares one cPanel account with
+    // the patrice, irish and rgehotel sites, each in its own folder with its own
+    // database, so a deploy that names the wrong folder overwrites that site's
+    // files and runs this repository's migrations against that site's data.
+    // That is not hypothetical: the patrice and irish repositories are forks of
+    // one another, and on 2026-09-29 the irish fork deployed over patrice for
+    // exactly this reason. scripts/deploy.ps1 reads this value and refuses any
+    // target that is not this subdomain, so the one thing that cannot be
+    // mistaken for another site is what the script trusts. Change the site and
+    // change this first, never the deploy script's defaults.
+    'slug' => env('SITE_SLUG', 'recursivefrog'),
+
     'tagline' => env('SITE_TAGLINE', 'Build. Automate. Scale.'),
 
     // Note: single quotes do not interpret \u{...}, so the typographic

@@ -9,6 +9,27 @@ Built on Laravel 13 with Vite and Tailwind CSS 4.
 
 ---
 
+## Deploying
+
+    pwsh -File scripts/deploy.ps1
+
+Always deploy with the script; never hand-copy files to the server. It reads the
+site slug from `config/site.php` and refuses any other URL, folder or database,
+backs up the live site and database, uploads the commit plus a locally built
+`public/build` (gitignored, so it has to be built here), migrates, then clears
+and rebuilds every cache and verifies the public pages return 200.
+
+This account also publishes the `patrice`, `irish` and `rgehotel` sites in
+sibling folders with their own databases. The slug check is the guard that stops
+this repository being published over one of them — the patrice/irish forks
+overwrote each other on 2026-09-29 because their deploy scripts were
+byte-identical. **Never copy `deploy.ps1` between project folders, and never
+point it at another site's folder or database.** If OpenSSH rejects your key
+for being too open, pass `-IdentityFile` pointing at a copy with clean
+permissions (the recipe is in the script's header).
+
+---
+
 ## Where to log in
 
 The admin panel lives at **`/admin`**. It is not linked from the public
