@@ -94,6 +94,26 @@ class PublicPagesTest extends TestCase
         }
     }
 
+    public function test_the_about_page_shows_nick_and_ralphs_profiles(): void
+    {
+        $response = $this->get('/about')->assertOk();
+        $content = $response->getContent();
+
+        $response
+            ->assertSee('Nick Ricamora')
+            ->assertSee('Ralph Dominic Aragon')
+            ->assertSee('img/team/nick.png', false)
+            ->assertSee('img/team/ralph.png', false)
+            ->assertSee('20+ years building for the web')
+            ->assertSee('7 years in salon and aesthetics operations and HR management')
+            ->assertSee('3 years in aesthetics distribution and e-commerce management', false)
+            ->assertSee('2 years in HVA: scribing, data entry and scheduling')
+            ->assertSee('Registered physical therapist in the Philippines')
+            ->assertSee('https://onwardphilippines.com/portfolio', false);
+
+        $this->assertSame(2, substr_count($content, 'DTI registered'));
+    }
+
     public function test_unpublished_projects_are_not_reachable(): void
     {
         Project::create([

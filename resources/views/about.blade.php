@@ -45,7 +45,7 @@
                     <dl class="mt-12 grid grid-cols-3 gap-6 border-t border-navy-800 pt-8">
                         @foreach ([
                             ['Cebu City', 'Based in'],
-                            ['3', 'People'],
+                            ['2', 'People'],
                             ['1 business day', 'Reply time'],
                         ] as [$value, $label])
                             <div>
@@ -57,53 +57,63 @@
                     </dl>
                 </div>
 
-                <div class="space-y-6">
-                    <h2 class="font-display text-2xl font-semibold">The team</h2>
+                <div>
+                    <x-eyebrow>The people behind the work</x-eyebrow>
+                    <h2 class="mt-5 font-display text-2xl font-semibold">Meet Nick and Ralph</h2>
 
-                    <ul class="grid gap-6 sm:grid-cols-3">
-                        @foreach ($roles as $member)
-                            <li class="reveal panel p-6">
-                                <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-navy-600 bg-navy-800 font-mono text-sm text-jade-400">
-                                    {{ $member->initials() }}
-                                </span>
-                                <h3 class="mt-5 font-display text-lg font-semibold">{{ $member->role }}</h3>
-                                @if ($member->focus)
-                                    <p class="mt-1.5 font-mono text-[0.625rem] uppercase tracking-[0.12em] text-jade-400/80">{{ $member->focus }}</p>
-                                @endif
-                                <p class="mt-3 text-[0.875rem] leading-relaxed text-mist-400">{{ $member->bio }}</p>
-                            </li>
-                        @endforeach
-                    </ul>
-
-                    @if ($specialist)
-                        <div class="reveal panel p-7">
-                            <p class="eyebrow">Technical specialist</p>
-                            <div class="mt-4 flex items-center gap-4">
-                                <span class="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-jade-500/30 bg-jade-500/10 font-display text-base font-semibold text-jade-300">
-                                    {{ $specialist->initials() }}
-                                </span>
-                                <div>
-                                    <h3 class="font-display text-xl font-semibold">{{ $specialist->name }}</h3>
-                                    <p class="mt-0.5 text-[0.875rem] text-mist-400">{{ $specialist->focus }}</p>
+                    <div class="mt-6 grid gap-5 sm:grid-cols-2">
+                        @foreach ($profiles as $profile)
+                            <article class="reveal panel flex h-full flex-col overflow-hidden">
+                                <div class="flex h-56 items-end justify-center overflow-hidden bg-bone-200">
+                                    <img
+                                        src="{{ asset($profile['photo']) }}"
+                                        alt="{{ $profile['alt'] }}"
+                                        class="h-full w-full object-contain object-bottom"
+                                        loading="lazy"
+                                    >
                                 </div>
-                            </div>
 
-                            <p class="mt-6 text-[0.9375rem] leading-relaxed text-mist-300">{{ $specialist->bio }}</p>
+                                <div class="flex flex-1 flex-col p-5">
+                                    <p class="font-mono text-[0.625rem] uppercase tracking-[0.12em] text-jade-600">
+                                        {{ $profile['role'] }}
+                                    </p>
+                                    <h3 class="mt-2 font-display text-xl font-semibold">{{ $profile['name'] }}</h3>
+                                    <p class="mt-1 text-sm text-ink-500">{{ $profile['focus'] }}</p>
 
-                            @if ($specialist->highlights)
-                                <ul class="mt-6 grid gap-2 sm:grid-cols-2">
-                                    @foreach ($specialist->highlights as $highlight)
-                                        <li class="flex items-start gap-2.5 text-[0.8125rem] text-mist-400">
-                                            <svg class="mt-0.5 h-3.5 w-3.5 shrink-0 text-jade-400" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                                                <path d="M2 7.2 5.4 10.6 12 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                            <span>{{ $highlight }}</span>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </div>
-                    @endif
+                                    <p class="mt-4 text-sm leading-relaxed text-ink-600">{{ $profile['bio'] }}</p>
+
+                                    <ul class="mt-4 space-y-2.5">
+                                        @foreach ($profile['highlights'] as $highlight)
+                                            <li class="flex items-start gap-2.5 text-[0.8125rem] leading-relaxed text-ink-600">
+                                                <svg class="mt-1 h-3.5 w-3.5 shrink-0 text-jade-600" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                                                    <path d="M2 7.2 5.4 10.6 12 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                                <span>{{ $highlight }}</span>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+
+                                    @if ($profile['portfolio'])
+                                        <a
+                                            href="{{ $profile['portfolio'] }}"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-jade-700 underline decoration-jade-500/40 underline-offset-4 transition hover:text-jade-900 focus-visible:text-jade-900"
+                                        >
+                                            View Nick’s portfolio
+                                            <span aria-hidden="true">↗</span>
+                                        </a>
+                                    @endif
+
+                                    <p class="mt-auto pt-5">
+                                        <span class="inline-flex items-center border border-jade-700/20 bg-jade-700/5 px-2.5 py-1 font-mono text-[0.625rem] uppercase tracking-[0.1em] text-jade-700">
+                                            DTI registered
+                                        </span>
+                                    </p>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

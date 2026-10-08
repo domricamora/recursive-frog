@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Faq;
-use App\Models\TeamMember;
 use App\Support\Seo;
 use Illuminate\View\View;
 
@@ -25,14 +24,41 @@ class PageController extends Controller
 
     public function about(): View
     {
-        $team = TeamMember::query()->published()->ordered()->get();
-
         return $this->publicView('about', [
             'title' => 'About',
             'description' => 'Recursive Frog builds digital systems for clinics that want more than a brochure website.',
         ], [
-            'roles' => $team->where('is_specialist', false)->values(),
-            'specialist' => $team->firstWhere('is_specialist', true),
+            'profiles' => [
+                [
+                    'name' => 'Nick Ricamora',
+                    'role' => 'Technical specialist',
+                    'focus' => 'Full-stack web developer, Cebu City',
+                    'photo' => 'img/team/nick.png',
+                    'alt' => 'Portrait of Nick Ricamora',
+                    'bio' => 'Nick builds booking platforms, SaaS products, e-commerce stores and marketing sites. He works mainly with Laravel, React and PHP, and also builds with Shopify and WordPress.',
+                    'highlights' => [
+                        '20+ years building for the web',
+                        'DOST Best Web Design award',
+                        'Laravel, React and PHP, plus Shopify and WordPress',
+                    ],
+                    'portfolio' => 'https://onwardphilippines.com/portfolio',
+                ],
+                [
+                    'name' => 'Ralph Dominic Aragon',
+                    'role' => 'Operations specialist',
+                    'focus' => 'Salon and aesthetics operations, HR and distribution',
+                    'photo' => 'img/team/ralph.png',
+                    'alt' => 'Portrait of Ralph Dominic Aragon',
+                    'bio' => 'Ralph brings hands-on experience across salon and aesthetics operations, people management, e-commerce and virtual assistance.',
+                    'highlights' => [
+                        '7 years in salon and aesthetics operations and HR management',
+                        '3 years in aesthetics distribution and e-commerce management (Shopee, TikTok and Lazada)',
+                        '2 years in HVA: scribing, data entry and scheduling',
+                        'Registered physical therapist in the Philippines',
+                    ],
+                    'portfolio' => null,
+                ],
+            ],
             'breadcrumbSchema' => Seo::breadcrumbSchema([
                 ['label' => 'Home', 'url' => route('home')],
                 ['label' => 'About', 'url' => route('about')],

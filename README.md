@@ -80,10 +80,11 @@ The login page is `noindex, nofollow` and `/admin` is disallowed in
 
 ## About this project
 
-The public site and the admin panel are the only two entry points. Everything a
-visitor reads — tiers, work, FAQs, team, contact details — comes from MySQL via
-the admin panel rather than from templates, so copy and content changes do not
-require a deploy.
+The public site and the admin panel are the only two entry points. Most
+visitor-facing content — tiers, work, FAQs and contact details — comes from
+MySQL via the admin panel. The Nick and Ralph profiles on the About page are
+maintained with the page content in `PageController`; the admin team list still
+feeds the homepage.
 
 ## Local setup
 
