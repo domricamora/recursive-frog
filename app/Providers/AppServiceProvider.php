@@ -6,9 +6,13 @@ use App\Models\ServiceTier;
 use App\Support\Site;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Mailer\Transport\Dsn;
+use Symfony\Component\Mailer\Transport\NativeTransportFactory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +32,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::preventLazyLoading(! $this->app->isProduction());
+
+        Mail::extend('native', function () {
+            return (new NativeTransportFactory(
+                null,
+                null,
+                $this->app->make(LoggerInterface::class),
+            ))->create(new Dsn('native', 'default'));
+        });
 
         if ($this->app->environment('production')) {
             URL::forceScheme('https');
