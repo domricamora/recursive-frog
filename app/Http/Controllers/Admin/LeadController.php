@@ -26,6 +26,7 @@ class LeadController extends Controller
                     $inner->where('first_name', 'like', "%{$term}%")
                         ->orWhere('last_name', 'like', "%{$term}%")
                         ->orWhere('clinic_name', 'like', "%{$term}%")
+                        ->orWhere('industry', 'like', "%{$term}%")
                         ->orWhere('email', 'like', "%{$term}%")
                         ->orWhere('phone', 'like', "%{$term}%");
                 });
@@ -109,7 +110,7 @@ class LeadController extends Controller
             ->get();
 
         $headers = [
-            'Reference', 'Received', 'Status', 'First name', 'Last name', 'Clinic',
+            'Reference', 'Received', 'Status', 'First name', 'Last name', 'Business', 'Industry',
             'Email', 'Phone', 'City', 'Website', 'Preferred contact', 'Tier interest',
             'Biggest challenge', 'Bookings', 'Inquiries', 'Software', 'Message',
             'Owner', 'Source URL', 'UTM source', 'UTM medium', 'UTM campaign',
@@ -122,6 +123,7 @@ class LeadController extends Controller
             $lead->first_name,
             $lead->last_name,
             $lead->clinic_name,
+            $lead->industry,
             $lead->email,
             $lead->phone,
             $lead->city,

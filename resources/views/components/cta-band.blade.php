@@ -1,6 +1,6 @@
 @props([
-    'title' => 'Let’s find the tier that fits your clinic.',
-    'copy' => 'Tell us how you handle bookings, inquiries and administration today. We will point you at the right starting point — even if that is “not sure yet”.',
+    'title' => 'Let’s find the right system for your business.',
+    'copy' => 'Tell us how your team handles customers, orders and day-to-day work. We will point you at the right starting point — even if that is “not sure yet”.',
     'track' => 'cta_band',
     'clip' => 'consult',
 ])
@@ -24,7 +24,7 @@
 
                 <div class="mt-8 flex flex-col gap-3 sm:flex-row">
                     <x-btn :href="route('contact')" variant="primary" :track="$track" class="w-full sm:w-auto">
-                        Find Your Tier
+                        Discuss Your Project
                         <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                             <path d="M3 8h9m0 0-3.2-3.2M12 8l-3.2 3.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -35,4 +35,3 @@
         </div>
     </div>
 </section>
-

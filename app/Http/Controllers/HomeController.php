@@ -16,7 +16,7 @@ class HomeController extends Controller
     {
         return $this->publicView('home', [
             'title' => null, // uses the configured default title
-            'description' => 'Build a better booking experience, automate repetitive admin work, and give your aesthetics clinic the digital systems it needs to grow.',
+            'description' => 'Websites, custom software and workflow automation for Cebu businesses in hospitality, e-commerce, services and more.',
         ], [
             'tiers' => ServiceTier::query()
                 ->active()

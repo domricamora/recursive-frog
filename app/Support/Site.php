@@ -47,12 +47,12 @@ class Site
 
     public static function email(): string
     {
-        return static::get('email', 'hello@recursivefrog.ph');
+        return static::get('email', 'admin@recursive-frog.com');
     }
 
     public static function phone(): string
     {
-        return static::get('phone');
+        return static::get('phone', '09758242517');
     }
 
     public static function name(): string

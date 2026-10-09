@@ -1,7 +1,7 @@
 <x-layouts.app :seo="$seo" :breadcrumb-schema="$breadcrumbSchema ?? null">
     <x-page-hero
         eyebrow="How it works"
-        title="From clinic problems to a working digital system."
+        title="From business challenges to a working digital system."
         copy="Six stages, in order. You always know what is happening, what we need from you, and what happens next."
         :crumbs="['Home' => route('home'), 'How It Works' => null]" />
 

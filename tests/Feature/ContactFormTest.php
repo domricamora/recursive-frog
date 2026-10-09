@@ -21,6 +21,7 @@ class ContactFormTest extends TestCase
             'first_name' => 'Juan',
             'last_name' => 'Dela Cruz',
             'clinic_name' => 'Glow Cebu',
+            'industry' => 'E-commerce',
             'email' => 'juan@glowcebu.ph',
             'phone' => '+63 917 555 1234',
             'city' => 'Cebu City',
@@ -42,9 +43,11 @@ class ContactFormTest extends TestCase
     {
         $this->get('/contact')
             ->assertOk()
-            ->assertSee('Find Your Tier', false)
+            ->assertSee('Talk through your project', false)
+            ->assertSee('Business name', false)
             ->assertSee('name="first_name"', false)
             ->assertSee('name="clinic_name"', false)
+            ->assertSee('name="industry"', false)
             ->assertSee('name="preferred_contact"', false)
             ->assertSee('name="tier_interest"', false)
             ->assertSee('name="consent"', false);
@@ -62,6 +65,7 @@ class ContactFormTest extends TestCase
         $this->assertDatabaseHas('leads', [
             'email' => 'juan@glowcebu.ph',
             'clinic_name' => 'Glow Cebu',
+            'industry' => 'E-commerce',
             'tier_interest' => 'not_sure',
             'tier_label' => 'Not sure yet',
             'consent' => true,
@@ -82,7 +86,8 @@ class ContactFormTest extends TestCase
 
         Mail::assertSent(
             \App\Mail\LeadInternalNotification::class,
-            fn ($mail) => $mail->hasTo('hello@recursivefrog.ph')
+            fn ($mail) => $mail->hasTo('admin@recursive-frog.com')
+                && $mail->hasCc('nick.weconnect@gmail.com')
         );
 
         Mail::assertSent(

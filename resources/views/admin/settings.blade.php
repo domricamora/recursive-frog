@@ -53,7 +53,6 @@
 
             <ul class="mt-5 space-y-2 text-sm">
                 @foreach ([
-                    'MAIL_LEADS_TO' => 'Where new-inquiry notifications are sent.',
                     'HUBSPOT_ACCESS_TOKEN' => 'Enables the optional CRM contact sync.',
                     'GA4_MEASUREMENT_ID' => 'Enables GA4 events.',
                     'GTM_CONTAINER_ID' => 'Enables Google Tag Manager.',

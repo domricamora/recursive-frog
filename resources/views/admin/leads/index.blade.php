@@ -12,7 +12,7 @@
             <div class="min-w-48 flex-1">
                 <label class="label" for="q">Search</label>
                 <input class="field" type="search" id="q" name="q" value="{{ $filters['q'] ?? '' }}"
-                       placeholder="Name, clinic, email or phone">
+                       placeholder="Name, business, email or phone">
             </div>
 
             <div>
@@ -51,7 +51,7 @@
                     <table class="w-full min-w-[52rem] text-left text-sm">
                         <thead class="border-b border-navy-800 bg-navy-850/60 font-mono text-[0.625rem] uppercase tracking-[0.14em] text-mist-500">
                             <tr>
-                                <th scope="col" class="px-5 py-3 font-normal">Clinic</th>
+                                <th scope="col" class="px-5 py-3 font-normal">Business</th>
                                 <th scope="col" class="px-5 py-3 font-normal">Contact</th>
                                 <th scope="col" class="px-5 py-3 font-normal">Tier</th>
                                 <th scope="col" class="px-5 py-3 font-normal">Status</th>
@@ -66,6 +66,9 @@
                                         <a href="{{ route('admin.leads.show', $lead) }}" class="font-medium text-mist-50 hover:text-jade-300">
                                             {{ $lead->clinic_name }}
                                         </a>
+                                        @if ($lead->industry)
+                                            <span class="block text-xs text-mist-500">{{ $lead->industry }}</span>
+                                        @endif
                                         <span class="block font-mono text-[0.625rem] text-mist-500">
                                             RF-{{ str_pad((string) $lead->id, 5, '0', STR_PAD_LEFT) }}
                                         </span>

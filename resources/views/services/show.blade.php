@@ -1,4 +1,4 @@
-<x-layouts.app :seo="$seo" :breadcrumb-schema="$breadcrumbSchema ?? null">
+<x-layouts.app :seo="$seo" :service-schema="$serviceSchema" :breadcrumb-schema="$breadcrumbSchema ?? null">
     <x-page-hero
         :eyebrow="$tier->model"
         :title="$tier->name"
@@ -18,7 +18,7 @@
             <div class="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
                 <div>
                     <x-eyebrow>What is included</x-eyebrow>
-                    <h2 class="mt-5 text-3xl leading-[1.05] sm:text-4xl">{{ $tier->includes }} for your clinic.</h2>
+                    <h2 class="mt-5 text-3xl leading-[1.05] sm:text-4xl">{{ $tier->includes }} for your business.</h2>
 
                     @if ($tier->description)
                         <p class="mt-6 max-w-2xl text-[1.0625rem] leading-relaxed text-mist-400">
@@ -118,5 +118,5 @@
 
     <x-cta-band
         title="Not sure which tier fits?"
-        copy="Tell us where your clinic is today and we will point you at the right starting point." />
+        copy="Tell us how your business works today and we will point you at the right starting point." />
 </x-layouts.app>

@@ -60,10 +60,11 @@ class HubSpot
     {
         return collect([
             'Tier interest: '.$lead->tierLabel(),
+            'Industry: '.($lead->industry ?: '—'),
             'Biggest challenge: '.($lead->challenge ?: '—'),
             'Bookings: '.($lead->booking_process ?: '—'),
             'Inquiries: '.($lead->inquiry_process ?: '—'),
-            'Clinic software: '.($lead->software_usage ?: '—'),
+            'Business software and tools: '.($lead->software_usage ?: '—'),
             'Message: '.($lead->message ?: '—'),
         ])->implode(PHP_EOL);
     }

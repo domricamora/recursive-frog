@@ -48,34 +48,34 @@ class ServiceTierSeeder extends Seeder
             'model' => 'Basic model',
             'includes' => 'Website',
             'badge' => 'Entry',
-            'summary' => 'A professional clinic website built around your booking journey, giving your clinic a digital foundation it owns.',
-            'short_description' => 'A booking-focused clinic website that gives your clinic a professional online presence and a digital foundation you own.',
-            'description' => 'Recursive 3 is the foundation: a clinic website designed to invite bookings rather than just describe them. '
-                .'It is built to be handed over cleanly — the site, the code and the data belong to your clinic once paid in full.',
-            'audience' => 'A clinic that currently has little or no online presence, or a website that is hard to book from, '
+            'summary' => 'A professional business website built around how customers find and choose your services, giving your business a digital foundation it owns.',
+            'short_description' => 'A website that gives your business a clear online presence and a digital foundation you own.',
+            'description' => 'Recursive 3 is the foundation: a business website designed to turn interest into a useful next step. '
+                .'It is built to be handed over cleanly — the site, the code and the data belong to your business once paid in full.',
+            'audience' => 'A business with little or no online presence, or a website that makes it hard for customers to take the next step, '
                 .'and wants a credible foundation before investing in internal software.',
             'problems_solved' => "Inquiries scattered across Messenger and Viber with nothing to show for it.\n"
-                .'A website that describes treatments but does not help anyone book.\n'
-                .'No reliable way to see how people are reaching the clinic at all.',
+                .'A website that lists services but does not help customers enquire, book or buy.\n'
+                .'No reliable way to see how people are finding the business.',
             'implementation' => "1. We look at how inquiries and bookings reach you today.\n"
                 ."2. We map the booking journey and design the site around it.\n"
                 ."3. We build and test on phones, tablets and computers.\n"
                 .'4. We launch, then keep sending written progress updates.',
-            'example_project' => 'VirtuaCore — a brand site built around an animated WebGL2 homepage, showing how far a clinic-facing site can be pushed visually.',
+            'example_project' => 'VirtuaCore — a brand site built around an animated WebGL2 homepage, showing how far a business website can be pushed visually.',
             'cta_label' => 'Discuss Recursive 3',
             'highlights' => ['Booking-focused', 'You own it', 'Weekly updates', 'One-day replies'],
             'display_order' => 1,
             'is_active' => true,
             'features' => [
                 [
-                    'name' => 'Booking-focused clinic website',
-                    'description' => 'Designed around how a patient actually books, not just a service list.',
+                    'name' => 'Customer-focused business website',
+                    'description' => 'Designed around how customers discover, choose and enquire about your services.',
                     'group' => 'Website',
                     'status' => ServiceTier::STATUS_CONFIRMED,
                 ],
                 [
                     'name' => 'Ownership of code and data',
-                    'description' => 'Website, code and data belong to your clinic once paid in full.',
+                    'description' => 'Website, code and data belong to your business once paid in full.',
                     'group' => 'Ownership',
                     'status' => ServiceTier::STATUS_CONFIRMED,
                 ],
@@ -98,8 +98,8 @@ class ServiceTierSeeder extends Seeder
                     'status' => ServiceTier::STATUS_CONFIRMED,
                 ],
                 [
-                    'name' => 'Treatment and service pages',
-                    'description' => 'Structured pages for each service the clinic offers.',
+                    'name' => 'Service and product pages',
+                    'description' => 'Structured pages for the services or products your business offers.',
                     'group' => 'Website',
                     'status' => ServiceTier::STATUS_DRAFT,
                 ],
@@ -127,24 +127,24 @@ class ServiceTierSeeder extends Seeder
             'slug' => 'recursive-5',
             'model' => 'Pro model',
             'includes' => 'Website + SaaS',
-            'badge' => 'Most clinics start here',
-            'summary' => 'Bring your public website and clinic software together as your operation grows.',
-            'short_description' => 'Connect the public-facing clinic website with software designed to support the operation behind it.',
-            'description' => 'Recursive 5 pairs the booking experience with the software that runs the clinic behind it — '
+            'badge' => 'For growing operations',
+            'summary' => 'Bring your public website and custom business software together as your operation grows.',
+            'short_description' => 'Connect your public website with custom software designed around the operation behind it.',
+            'description' => 'Recursive 5 pairs your public website with the software that runs the business behind it — '
                 .'so the front door and the back office are finally the same system instead of two disconnected things.',
-            'audience' => 'A growing clinic with real booking volume, where staff are handling scheduling, records and stock '
+            'audience' => 'A growing business with real customer, order or booking volume, where staff are handling schedules, records and stock '
                 .'across notebooks, paper forms and chat threads.',
-            'problems_solved' => "Appointments missed with no reminders or deposits in place.\n"
-                .'Patient history split between notebooks and paper forms.'."\n"
+            'problems_solved' => "Orders or bookings missed because information is scattered across channels.\n"
+                .'Customer, project or operational records split between notebooks and files.'."\n"
                 .'Not knowing stock levels until something runs out.'."\n"
                 .'Finding out how the month went only at month-end.',
             'implementation' => "1. We learn how inquiries, bookings, records, payments and reporting work today.\n"
                 ."2. We define the scope and the right split between website and software.\n"
                 ."3. We build and test the workflows with your staff in mind.\n"
                 .'4. We launch with ongoing support and clear communication.',
-            'example_project' => 'DeskPulse — a multi-tenant time-tracking SaaS built on Laravel, with separate dashboards per role, the pattern clinic software follows.',
+            'example_project' => 'DeskPulse — a multi-tenant time-tracking SaaS built on Laravel, with separate dashboards per role, a pattern used in custom business software.',
             'cta_label' => 'Discuss Recursive 5',
-            'highlights' => ['Website + SaaS', 'Role-based access', 'Patient history', 'Stock visibility'],
+            'highlights' => ['Website + SaaS', 'Role-based access', 'Business records', 'Stock visibility'],
             'display_order' => 2,
             'is_active' => true,
             'features' => [
@@ -155,7 +155,7 @@ class ServiceTierSeeder extends Seeder
                     'status' => ServiceTier::STATUS_CONFIRMED,
                 ],
                 [
-                    'name' => 'Clinic software connected to the website',
+                    'name' => 'Business software connected to the website',
                     'description' => 'One system across the public site and day-to-day operations.',
                     'group' => 'Software',
                     'status' => ServiceTier::STATUS_CONFIRMED,
@@ -167,8 +167,8 @@ class ServiceTierSeeder extends Seeder
                     'status' => ServiceTier::STATUS_CONFIRMED,
                 ],
                 [
-                    'name' => 'Patient history in one place',
-                    'description' => 'Records kept in the system rather than notebooks and paper forms.',
+                    'name' => 'Customer and operational records',
+                    'description' => 'Business records kept in the system rather than notebooks and scattered files.',
                     'group' => 'Software',
                     'status' => ServiceTier::STATUS_CONFIRMED,
                 ],
@@ -219,12 +219,12 @@ class ServiceTierSeeder extends Seeder
             'short_description' => 'Add administrative automation to the website and software foundation.',
             'description' => 'Recursive 7 adds administrative automation on top of the website and software. '
                 .'AI drafts and suggests; a person always reviews and approves before anything happens. '
-                .'AI does admin only — it does not diagnose, recommend treatments or make clinical decisions.',
-            'audience' => 'An established clinic where repetitive administrative work has become the bottleneck, and where '
+                .'AI handles administrative work only; people review its suggestions before action. It does not make clinical, financial, hiring or other high-stakes decisions.',
+            'audience' => 'An established business where repetitive administrative work has become the bottleneck, and where '
                 .'the team needs systems that scale without adding headcount for routine paperwork.',
-            'problems_solved' => "Clients who visit once and never come back.\n"
+            'problems_solved' => "Customers who buy once and never come back.\n"
                 .'Repetitive administrative work consuming staff hours.'."\n"
-                .'Appointments, reminders and follow-up handled by memory.'."\n"
+                .'Bookings, order updates and follow-up handled by memory.'."\n"
                 .'Growth that outpaces the current way of working.',
             'implementation' => "1. We map the administrative work that repeats every week.\n"
                 ."2. We agree which steps AI may draft and which stay manual.\n"
@@ -238,7 +238,7 @@ class ServiceTierSeeder extends Seeder
             'features' => [
                 [
                     'name' => 'Everything in Recursive 5',
-                    'description' => 'The website and clinic software foundation, carried forward.',
+                    'description' => 'The website and business software foundation, carried forward.',
                     'group' => 'Included',
                     'status' => ServiceTier::STATUS_CONFIRMED,
                 ],
@@ -255,8 +255,8 @@ class ServiceTierSeeder extends Seeder
                     'status' => ServiceTier::STATUS_CONFIRMED,
                 ],
                 [
-                    'name' => 'AI does admin only',
-                    'description' => 'No diagnosis, no treatment recommendations, no clinical decisions.',
+                    'name' => 'AI for administrative work only',
+                    'description' => 'People approve its suggestions; AI does not make clinical, financial, hiring or other high-stakes decisions.',
                     'group' => 'Responsible AI',
                     'status' => ServiceTier::STATUS_CONFIRMED,
                 ],
@@ -268,7 +268,7 @@ class ServiceTierSeeder extends Seeder
                 ],
                 [
                     'name' => 'Activity logs on sensitive actions',
-                    'description' => 'A record of who did what, especially around patient data.',
+                    'description' => 'A record of who did what, especially around sensitive customer and business data.',
                     'group' => 'Security',
                     'status' => ServiceTier::STATUS_CONFIRMED,
                 ],

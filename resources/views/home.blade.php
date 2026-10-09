@@ -14,8 +14,8 @@
 
             <div class="mt-10 grid gap-8 border-t border-white/25 pt-8 md:grid-cols-[1.1fr_0.9fr] md:gap-16">
                 <p class="reveal max-w-lg text-lg leading-relaxed text-white/85" data-reveal-order="3">
-                    {{ config('site.positioning') }} Build a better booking experience, automate
-                    repetitive admin work, and give your clinic the systems it needs to grow.
+                    {{ config('site.positioning') }} Help customers find you, connect the tools
+                    your team relies on, and automate repetitive work.
                 </p>
 
                 <div class="reveal flex flex-col items-start gap-6 md:items-end" data-reveal-order="4">
@@ -52,7 +52,7 @@
                 <x-eyebrow>The approach</x-eyebrow>
                 <p class="display display-3 mt-6">
                     Recursive Frog builds the website, the software behind it and the
-                    automation that keeps it running — as one system, owned by your clinic.
+                    automation that keeps it running — as one system, owned by your business.
                 </p>
                 <a href="{{ route('how-it-works') }}" data-track-cta="approach" class="link-rule mt-8 inline-flex items-center gap-3 text-white/90">
                     How it works
@@ -74,13 +74,13 @@
         <div class="shell">
             <div class="grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:gap-20">
                 <h2 class="display display-2">
-                    Running a clinic is hard enough.
+                    Running a business is hard enough.
                 </h2>
 
                 <div class="lg:pt-3">
                     <p class="text-[1.0625rem] leading-relaxed text-ink-500">
-                        Your clinic should not have to depend on scattered messages, paper forms and
-                        manual admin work to keep everything moving.
+                        Your business should not have to depend on scattered messages, spreadsheets
+                        and manual admin work to keep customers and operations moving.
                     </p>
                     <a href="{{ route('contact') }}" data-track-cta="problem" class="link-rule mt-6 inline-block text-ink-900">
                         Talk to Recursive Frog
@@ -91,11 +91,11 @@
             <ul class="mt-16 grid border-t border-ink-900/10 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ([
                     ['01', 'Buried inquiries', 'Inquiries getting buried in Messenger and Viber chats?'],
-                    ['02', 'Missed appointments', 'Appointments missed because there are no reminders or deposits?'],
-                    ['03', 'Scattered patient history', 'Patient history split between notebooks and paper forms?'],
+                    ['02', 'Lost bookings and orders', 'Customers ready to buy, but no clear way to book or order?'],
+                    ['03', 'Scattered records', 'Customer, project or inventory records split across files and chats?'],
                     ['04', 'Stock uncertainty', 'Not sure what is in stock until it runs out?'],
                     ['05', 'Limited visibility', 'Finding out your numbers only at month-end?'],
-                    ['06', 'One-time clients', 'Clients who visit once and never come back?'],
+                    ['06', 'Missed follow-up', 'Good customers slipping away because follow-up depends on memory?'],
                 ] as $i => [$number, $title, $body])
                     <li class="reveal border-b border-ink-900/10 py-8 sm:pr-8 {{ $i % 3 === 2 ? 'lg:pr-0' : '' }} {{ $i >= 3 ? 'lg:border-t lg:border-ink-900/10' : '' }} lg:[&:nth-child(3n+1)]:pl-0 lg:[&:nth-child(3n)]:pr-8">
                         <span class="circled" aria-hidden="true">{{ $number }}</span>
@@ -123,9 +123,9 @@
 
             <ol class="mt-14 grid gap-6 md:grid-cols-3">
                 @foreach ([
-                    ['01', 'Build', 'build', 'A website designed to invite bookings, built on a foundation you own outright.'],
+                    ['01', 'Build', 'build', 'A website that turns interest into enquiries, bookings or sales — built on a foundation you own.'],
                     ['02', 'Automate', 'automate', 'AI and automation for administrative work. A person always stays in charge.'],
-                    ['03', 'Scale', 'scale', 'Clinic software that grows as your clinic grows — records, stock, numbers.'],
+                    ['03', 'Scale', 'scale', 'Business software that grows with your operations — customers, stock, schedules and reporting.'],
                 ] as [$number, $title, $clip, $body])
                     <li class="card card-lift reveal flex flex-col overflow-hidden">
                         <div class="film relative h-52 shrink-0">
@@ -307,4 +307,3 @@
 
     <x-cta-band />
 </x-layouts.app>
-

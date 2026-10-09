@@ -1,4 +1,4 @@
-@props(['seo', 'filmHero' => false, 'organisationSchema' => null, 'faqSchema' => null, 'breadcrumbSchema' => null])
+@props(['seo', 'filmHero' => false, 'organisationSchema' => null, 'websiteSchema' => null, 'serviceSchema' => null, 'faqSchema' => null, 'breadcrumbSchema' => null])
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -27,6 +27,8 @@
     <meta property="og:image" content="{{ asset($seo['image']) }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{{ $seo['site_name'] }} — websites, custom software and automation for Cebu businesses">
+    <meta property="og:image:type" content="image/png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $seo['title'] }}">
     <meta name="twitter:description" content="{{ $seo['description'] }}">
@@ -35,8 +37,14 @@
     <link rel="icon" href="{{ asset('img/recursivefrog-logo.png') }}" type="image/png">
 
     {{-- Structured data (plan.md #29) --}}
-    @foreach (array_filter([$organisationSchema ?? null, $faqSchema ?? null, $breadcrumbSchema ?? null]) as $schema)
-        <script type="application/ld+json">{!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+    @foreach (array_filter([
+        $organisationSchema ?? \App\Support\Seo::organisationSchema(),
+        $websiteSchema ?? \App\Support\Seo::websiteSchema(),
+        $serviceSchema,
+        $faqSchema ?? null,
+        $breadcrumbSchema ?? null,
+    ]) as $schema)
+        <script type="application/ld+json">{!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
     @endforeach
 
     @if (filled(config('services.analytics.gtm_container_id')))
@@ -77,4 +85,3 @@
     @stack('scripts')
 </body>
 </html>
-

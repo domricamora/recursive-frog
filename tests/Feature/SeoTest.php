@@ -4,7 +4,9 @@ namespace Tests\Feature;
 
 use App\Models\Faq;
 use App\Models\Project;
+use App\Models\SiteSetting;
 use App\Models\ServiceTier;
+use App\Support\Site;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -41,6 +43,21 @@ class SeoTest extends TestCase
             ->assertSee('Sitemap: '.route('sitemap'), false);
     }
 
+    public function test_llms_txt_describes_the_business_and_links_public_pages(): void
+    {
+        SiteSetting::put('email', 'admin@recursive-frog.com');
+        SiteSetting::put('phone', '09758242517');
+        Site::flush();
+
+        $this->get('/llms.txt')
+            ->assertOk()
+            ->assertHeader('Content-Type', 'text/plain; charset=UTF-8')
+            ->assertSee('businesses across industries', false)
+            ->assertSee(route('services.index'), false)
+            ->assertSee('Email: admin@recursive-frog.com', false)
+            ->assertSee('Phone: 09758242517', false);
+    }
+
     public function test_pages_carry_canonical_open_graph_and_description_tags(): void
     {
         $this->get('/about')
@@ -48,14 +65,17 @@ class SeoTest extends TestCase
             ->assertSee('<link rel="canonical"', false)
             ->assertSee('property="og:title"', false)
             ->assertSee('property="og:image"', false)
+            ->assertSee('property="og:image:alt"', false)
+            ->assertSee('name="twitter:card" content="summary_large_image"', false)
             ->assertSee('name="description"', false);
     }
 
-    public function test_the_homepage_emits_organisation_schema(): void
+    public function test_public_pages_emit_organisation_and_website_schema(): void
     {
         $this->get('/')
             ->assertOk()
-            ->assertSee('"@type":"Organization"', false);
+            ->assertSee('"@type":"Organization"', false)
+            ->assertSee('"@type":"WebSite"', false);
     }
 
     public function test_tier_pages_emit_breadcrumb_schema(): void
@@ -64,7 +84,8 @@ class SeoTest extends TestCase
 
         $this->get('/services/recursive-3')
             ->assertOk()
-            ->assertSee('BreadcrumbList', false);
+            ->assertSee('BreadcrumbList', false)
+            ->assertSee('"@type":"Service"', false);
     }
 
     public function test_admin_sends_are_not_indexable(): void

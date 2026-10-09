@@ -13,7 +13,7 @@ class ServiceTierController extends Controller
     {
         return $this->publicView('services.index', [
             'title' => 'Services',
-            'description' => 'Choose the system your clinic needs today. Start with the foundation, add software as your operation grows, and introduce automation when it makes sense.',
+            'description' => 'Choose a website, custom business software or automation to suit your operation. We build for hospitality, e-commerce, service businesses and more.',
         ], [
             'tiers' => ServiceTier::query()
                 ->active()
@@ -36,6 +36,7 @@ class ServiceTierController extends Controller
             'tier' => $tier,
             'publishedFeatures' => $tier->features->where('status', ServiceTier::STATUS_CONFIRMED),
             'otherTiers' => ServiceTier::query()->active()->ordered()->whereKeyNot($tier->getKey())->get(),
+            'serviceSchema' => Seo::serviceSchema($tier),
             'breadcrumbSchema' => Seo::breadcrumbSchema([
                 ['label' => 'Home', 'url' => route('home')],
                 ['label' => 'Services', 'url' => route('services.index')],

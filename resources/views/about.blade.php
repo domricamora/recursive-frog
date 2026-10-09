@@ -1,7 +1,7 @@
 <x-layouts.app :seo="$seo" :breadcrumb-schema="$breadcrumbSchema ?? null">
     <x-page-hero
         eyebrow="About"
-        title="Technology that fits the way your clinic works."
+        title="Technology that fits the way your business works."
         :crumbs="['Home' => route('home'), 'About' => null]">
         <x-slot:actions>
             <x-btn :href="route('work.index')" variant="outline" track="about_work" class="w-full sm:w-auto">See our work</x-btn>
@@ -14,7 +14,7 @@
             <div class="max-w-3xl">
                 <x-eyebrow>What we believe</x-eyebrow>
                 <p class="statement statement-1 mt-6">
-                    A clinic’s software should fit the way the clinic already works —
+                    Your software should fit the way your business already works —
                     not replace it overnight.
                 </p>
             </div>
@@ -31,14 +31,14 @@
                     </h2>
                     <div class="mt-6 space-y-4 text-[1.0625rem] leading-relaxed text-mist-400">
                         <p>
-                            Recursive Frog builds digital systems for clinics that want more than a brochure
-                            website. The company combines websites, software and automation into a
-                            progression that can grow with the clinic.
+                            Recursive Frog builds digital systems for businesses that need more than a brochure
+                            website. The team combines websites, custom software and automation into a
+                            progression that can grow with your operation.
                         </p>
                         <p>
-                            That progression is the whole idea behind the three tiers: start with the booking
-                            experience, connect the operation behind it, and only then automate the
-                            repetitive parts — with a person always approving what the system does.
+                            The three service tiers meet you where you are: build a useful digital front door,
+                            connect the systems behind it, and then automate repeat work — with a person
+                            always reviewing what the system does.
                         </p>
                     </div>
 

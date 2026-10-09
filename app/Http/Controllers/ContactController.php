@@ -20,8 +20,8 @@ class ContactController extends Controller
     public function create(): View
     {
         return $this->publicView('contact', [
-            'title' => 'Find Your Tier',
-            'description' => 'Tell us a little about your clinic and how you currently handle bookings, inquiries and administration.',
+            'title' => 'Start a Project',
+            'description' => 'Tell us about your business, its industry and the workflows you want to improve. We build websites, software and automation around how you work.',
         ], [
             'tiers' => ServiceTier::query()->active()->ordered()->get(),
             'preferredContacts' => [
@@ -71,7 +71,9 @@ class ContactController extends Controller
     protected function notifyInternal(Lead $lead): void
     {
         try {
-            Mail::to(config('mail.leads_to'))->send(new LeadInternalNotification($lead));
+            Mail::to(config('mail.leads_to'))
+                ->cc(config('mail.leads_cc'))
+                ->send(new LeadInternalNotification($lead));
         } catch (\Throwable $e) {
             Log::error('Internal lead notification failed.', ['message' => $e->getMessage(), 'lead_id' => $lead->id]);
         }

@@ -46,6 +46,7 @@ Route::get('/contact/thank-you', [ContactController::class, 'thankYou'])->name('
 
 Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
 Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
+Route::get('/llms.txt', [SeoController::class, 'llms'])->name('llms');
 
 /*
 |--------------------------------------------------------------------------

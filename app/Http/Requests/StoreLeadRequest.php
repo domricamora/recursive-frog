@@ -22,6 +22,7 @@ class StoreLeadRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:80'],
             'last_name' => ['required', 'string', 'max:80'],
             'clinic_name' => ['required', 'string', 'max:160'],
+            'industry' => ['nullable', 'string', 'max:120'],
             'email' => ['required', 'string', 'email:filter', 'max:190'],
             'phone' => ['required', 'string', 'max:40', 'regex:/^[0-9+()\-\s()]{6,40}$/'],
             'city' => ['required', 'string', 'max:120'],
@@ -59,7 +60,8 @@ class StoreLeadRequest extends FormRequest
         return [
             'first_name' => 'first name',
             'last_name' => 'last name',
-            'clinic_name' => 'clinic name',
+            'clinic_name' => 'business name',
+            'industry' => 'industry or business type',
             'preferred_contact' => 'preferred contact method',
             'tier_interest' => 'tier interest',
             'company_fax' => 'company fax',
@@ -70,20 +72,22 @@ class StoreLeadRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'website.required' => 'Please enter your clinic website, or type "None" if you do not have one yet.',
+            'website.required' => 'Please enter your business website, or type "None" if you do not have one yet.',
             'phone.regex' => 'Please enter a valid phone number.',
             'consent.accepted' => 'Please confirm we may contact you about your inquiry.',
             'company_fax.prohibited' => 'Submission rejected.',
         ];
     }
 
-    /** @return array<string, mixed> */
     protected function prepareForValidation(): void
     {
+        $industry = trim((string) $this->input('industry'));
+
         $this->merge([
             'first_name' => trim((string) $this->input('first_name')),
             'last_name' => trim((string) $this->input('last_name')),
             'clinic_name' => trim((string) $this->input('clinic_name')),
+            'industry' => $industry === '' ? null : $industry,
             'city' => trim((string) $this->input('city')),
             'website' => trim((string) $this->input('website')),
             'email' => mb_strtolower(trim((string) $this->input('email'))),

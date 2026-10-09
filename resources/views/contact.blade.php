@@ -1,8 +1,8 @@
 <x-layouts.app :seo="$seo">
     <x-page-hero
-        eyebrow="Find your tier"
-        title="Let’s find the tier that fits your clinic."
-        copy="Tell us a little about your clinic and how you currently handle bookings, inquiries and administration."
+        eyebrow="Talk through your project"
+        title="Let’s find the right system for your business."
+        copy="Tell us what your business does, which industry you are in and where your current website or workflows get in the way."
         :crumbs="['Home' => route('home'), 'Contact' => null]" />
 
     <section class="py-16 md:py-24">
@@ -43,13 +43,14 @@
                             <div class="grid gap-6 sm:grid-cols-2">
                                 <x-form-field name="first_name" label="First name" :value="old('first_name')" placeholder="Juan" />
                                 <x-form-field name="last_name" label="Last name" :value="old('last_name')" placeholder="Dela Cruz" />
-                                <x-form-field name="clinic_name" label="Clinic name" :value="old('clinic_name')" placeholder="Your clinic" :span="true" />
-                                <x-form-field name="email" label="Email" type="email" :value="old('email')" placeholder="you@clinic.ph" />
+                                <x-form-field name="clinic_name" label="Business name" :value="old('clinic_name')" placeholder="Your business" :span="true" />
+                                <x-form-field name="industry" label="Industry or business type" :value="old('industry')" placeholder="Hospitality, e-commerce, health, logistics…" hint="Optional. Tell us the niche or category you work in." :required="false" :span="true" />
+                                <x-form-field name="email" label="Work email" type="email" :value="old('email')" placeholder="you@business.com" />
                                 <x-form-field name="phone" label="Phone" type="tel" :value="old('phone')" placeholder="+63 917 000 0000" />
                                 <x-form-field name="city" label="City" :value="old('city', 'Cebu City')" />
                                 <x-form-field name="website" label="Current website" :value="old('website')"
                                               placeholder="https://… or “None”"
-                                              hint="If your clinic has no website yet, type “None”." />
+                                              hint="If your business has no website yet, type “None”." />
                             </div>
 
                             <div class="mt-6">
@@ -70,24 +71,24 @@
                         </fieldset>
 
                         <fieldset class="mt-10">
-                            <legend class="label mb-4">Your clinic today</legend>
+                            <legend class="label mb-4">Your business today</legend>
 
                             <div class="grid gap-6 sm:grid-cols-2">
                                 <x-form-field name="challenge" label="Biggest digital challenge" type="textarea" :span="true"
                                               :value="old('challenge')" :rows="3"
-                                              placeholder="What is the hardest part of running the clinic online right now?" />
+                                              placeholder="What is the hardest part of running your business online or behind the scenes?" />
 
-                                <x-form-field name="booking_process" label="How you manage bookings" type="textarea" :span="true"
+                                <x-form-field name="booking_process" label="How you manage bookings or orders" type="textarea" :span="true"
                                               :value="old('booking_process')" :rows="3"
-                                              placeholder="Paper diary, personal calendar, Messenger thread…?" />
+                                              placeholder="How do customers book, place orders, request quotes or start work with you?" />
 
-                                <x-form-field name="inquiry_process" label="How inquiries reach you" type="textarea" :span="true"
+                                <x-form-field name="inquiry_process" label="How customers or clients reach you" type="textarea" :span="true"
                                               :value="old('inquiry_process')" :rows="3"
-                                              placeholder="Which channels, and who checks them?" />
+                                              placeholder="Which channels do they use, and who follows up?" />
 
-                                <x-form-field name="software_usage" label="Clinic management software" type="textarea" :span="true"
+                                <x-form-field name="software_usage" label="Business software and tools" type="textarea" :span="true"
                                               :value="old('software_usage')" :rows="3" :required="false"
-                                              placeholder="If you use any, which one? If not, type “None”." />
+                                              placeholder="Which tools do you use for operations, sales or reporting? If none, type “None”." />
                             </div>
                         </fieldset>
 
@@ -137,8 +138,8 @@
                             @error('consent') <span class="error" id="consent-error">{{ $message }}</span> @enderror
 
                             <p class="mt-4 text-xs leading-relaxed text-mist-500">
-                                Please do not include medical histories or patient records. We only ask for the
-                                business information we need to reply to you.
+                                Please do not include confidential customer, employee, financial or patient records.
+                                A high-level description is enough for us to reply.
                             </p>
 
                             <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -188,8 +189,8 @@
                     <div class="panel p-7">
                         <p class="eyebrow">Privacy</p>
                         <p class="mt-4 text-[0.875rem] leading-relaxed text-mist-400">
-                            We store only what we need to reply, keep it behind role-based access, and never
-                            ask for patient or medical details through this form.
+                            We store only what we need to reply and keep it behind role-based access. Do not send
+                            confidential customer, employee, financial or patient details through this form.
                         </p>
                     </div>
                 </aside>
@@ -210,4 +211,3 @@
         </div>
     </x-film-panel>
 </x-layouts.app>
-

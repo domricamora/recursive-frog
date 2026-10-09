@@ -42,7 +42,7 @@ class SiteSettingSeeder extends Seeder
             ],
             [
                 'key' => 'phone', 'label' => 'Phone', 'group' => 'contact', 'type' => 'tel',
-                'hint' => 'Include the country code, e.g. +63 917 000 0000.',
+                'hint' => 'Use the local number or include the country code.',
                 'value' => (string) config('site.phone'),
             ],
             [

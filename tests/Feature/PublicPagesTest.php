@@ -20,7 +20,7 @@ class PublicPagesTest extends TestCase
             ->assertSee('Build.', false)
             ->assertSee('Automate.', false)
             ->assertSee('Scale.', false)
-            ->assertSee('Digital systems for Cebu', false)
+            ->assertSee('Websites, custom software and automation for Cebu businesses', false)
             ->assertSee(route('contact'), false)
             ->assertSee(route('work.index'), false);
     }

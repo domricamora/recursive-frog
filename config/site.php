@@ -32,11 +32,11 @@ return [
 
     // Note: single quotes do not interpret \u{...}, so the typographic
     // apostrophe is written literally here.
-    'positioning' => 'Digital systems for Cebu’s aesthetics clinics.',
+    'positioning' => 'Websites, custom software and automation for Cebu businesses.',
 
-    'email' => env('SITE_EMAIL', 'hello@recursivefrog.ph'),
+    'email' => env('SITE_EMAIL', 'admin@recursive-frog.com'),
 
-    'phone' => env('SITE_PHONE', '+63 917 000 0000'),
+    'phone' => env('SITE_PHONE', '09758242517'),
 
     'city' => env('SITE_CITY', 'Cebu City, Philippines'),
 
@@ -58,8 +58,8 @@ return [
     */
 
     'seo' => [
-        'title' => 'Recursive Frog — Digital Systems for Cebu Aesthetics Clinics',
-        'description' => 'Build a better booking experience, automate repetitive admin work, and give your aesthetics clinic the digital systems it needs to grow.',
+        'title' => 'Recursive Frog | Websites, Software & Automation for Cebu Businesses',
+        'description' => 'Websites, custom software and workflow automation for Cebu businesses in hospitality, e-commerce and services. Digital systems built around your work.',
         'og_image' => 'img/og-cover.png',
         'twitter_handle' => '',
     ],
@@ -85,11 +85,11 @@ return [
         ],
         [
             'title' => 'You own it',
-            'body' => 'Website, code and data belong to your clinic once paid in full.',
+            'body' => 'Website, code and data belong to your business once paid in full.',
         ],
         [
-            'title' => 'Patient data protected',
-            'body' => 'Access levels per role, activity logs and consent-first processes.',
+            'title' => 'Business data protected',
+            'body' => 'Access levels per role, activity logs and consent-first processes for sensitive business and client data.',
         ],
         [
             'title' => 'AI does admin only',

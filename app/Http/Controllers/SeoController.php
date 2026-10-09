@@ -49,4 +49,54 @@ class SeoController extends Controller
         return response($xml, 200, ['Content-Type' => 'application/xml; charset=UTF-8'])
             ->header('Cache-Control', 'public, max-age=3600');
     }
+
+    public function llms(): Response
+    {
+        $tiers = ServiceTier::query()->active()->ordered()->get();
+        $projects = Project::query()->published()->ordered()->get();
+        $lines = [
+            '# Recursive Frog',
+            '',
+            '> Cebu-based digital studio building websites, custom software and workflow automation for businesses across industries.',
+            '',
+            '## Who we help',
+            '',
+            'Aesthetics clinics, hospitality and booking businesses, e-commerce brands, and teams with workflows that off-the-shelf software does not fit.',
+            '',
+            '## Services',
+            '',
+        ];
+
+        foreach ($tiers as $tier) {
+            $lines[] = '- ['.$tier->name.']('.route('services.show', $tier).'): '.$tier->short_description;
+        }
+
+        $lines = [...$lines, '', '## Selected work', ''];
+
+        foreach ($projects as $project) {
+            $lines[] = '- ['.$project->name.']('.route('work.show', $project).'): '.$project->summary;
+        }
+
+        $lines = [
+            ...$lines,
+            '',
+            '## More information',
+            '',
+            '- [Home]('.route('home').')',
+            '- [Services]('.route('services.index').')',
+            '- [How it works]('.route('how-it-works').')',
+            '- [About]('.route('about').')',
+            '- [FAQ]('.route('faq').')',
+            '- [Contact]('.route('contact').')',
+            '- [XML sitemap]('.route('sitemap').')',
+            '',
+            '## Contact',
+            '',
+            'Email: '.Site::email(),
+            'Phone: '.Site::phone(),
+        ];
+
+        return response(implode(PHP_EOL, $lines), 200, ['Content-Type' => 'text/plain; charset=UTF-8'])
+            ->header('Cache-Control', 'public, max-age=3600');
+    }
 }

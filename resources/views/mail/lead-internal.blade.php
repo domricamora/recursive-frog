@@ -1,10 +1,11 @@
 <x-mail::message>
-# New clinic inquiry
+# New business inquiry
 
 A new lead was submitted through the Recursive Frog website.
 
 **Contact:** {{ $lead->fullName() }}  
-**Clinic:** {{ $lead->clinic_name }}  
+**Business:** {{ $lead->clinic_name }}  
+**Industry:** {{ $lead->industry ?: '—' }}  
 **Email:** [{{ $lead->email }}](mailto:{{ $lead->email }})  
 **Phone:** {{ $lead->phone }}  
 **City:** {{ $lead->city ?: '—' }}  
@@ -13,12 +14,12 @@ A new lead was submitted through the Recursive Frog website.
 
 **Selected tier:** {{ $lead->tierLabel() }}
 
-## Clinic details
+## Business details
 
 - **Biggest digital challenge:** {{ $lead->challenge ?: '—' }}
 - **How bookings are managed:** {{ $lead->booking_process ?: '—' }}
 - **How inquiries are received:** {{ $lead->inquiry_process ?: '—' }}
-- **Clinic management software:** {{ $lead->software_usage ?: '—' }}
+- **Business software and tools:** {{ $lead->software_usage ?: '—' }}
 
 ## Message
 

@@ -26,7 +26,7 @@ class Lead extends Model
     public const TIER_NOT_SURE = 'not_sure';
 
     protected $fillable = [
-        'first_name', 'last_name', 'clinic_name', 'email', 'phone', 'city', 'website',
+        'first_name', 'last_name', 'clinic_name', 'industry', 'email', 'phone', 'city', 'website',
         'preferred_contact', 'challenge', 'booking_process', 'inquiry_process',
         'software_usage', 'tier_interest', 'tier_label', 'message', 'consent',
         'consented_at', 'source_url', 'utm_source', 'utm_medium', 'utm_campaign',

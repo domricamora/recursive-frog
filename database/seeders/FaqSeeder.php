@@ -21,18 +21,19 @@ class FaqSeeder extends Seeder
         return [
             [
                 'question' => 'What does Recursive Frog build?',
-                'answer' => 'Websites, clinic software and administrative automation, depending on the selected service tier. '
-                    .'Recursive 3 is the website, Recursive 5 adds clinic software, and Recursive 7 adds administrative automation.',
+                'answer' => 'Websites, custom business software and administrative automation, depending on the selected service tier. '
+                    .'Recursive 3 is the website, Recursive 5 adds business software, and Recursive 7 adds administrative automation.',
                 'category' => 'Services',
             ],
             [
-                'question' => 'Which clinics do you work with?',
-                'answer' => 'The current offer is focused on aesthetics clinics in Cebu City and surrounding areas.',
+                'question' => 'Which industries do you work with?',
+                'answer' => 'We build for businesses across industries, including aesthetics, hospitality, e-commerce and service businesses. '
+                    .'The system is scoped around your customers, workflows and goals.',
                 'category' => 'Services',
             ],
             [
                 'question' => 'Do we own the website?',
-                'answer' => 'Yes. The offer states that the website, code and data belong to the clinic once paid in full. '
+                'answer' => 'Yes. The website, code and data belong to your business once paid in full. '
                     .'There is no lock-in.',
                 'category' => 'Ownership',
             ],
@@ -43,9 +44,9 @@ class FaqSeeder extends Seeder
                 'category' => 'Services',
             ],
             [
-                'question' => 'Does AI make medical decisions?',
-                'answer' => 'No. The stated approach is that AI handles administrative work only and does not diagnose or recommend '
-                    .'treatments. AI drafts suggestions, a person reviews, and the system only acts after a person approves.',
+                'question' => 'Does AI make decisions on its own?',
+                'answer' => 'No. AI handles administrative work only. A person reviews and approves suggestions before action, '
+                    .'and AI does not make clinical, financial, hiring or other high-stakes decisions.',
                 'category' => 'Responsible AI',
             ],
             [
@@ -64,9 +65,9 @@ class FaqSeeder extends Seeder
                 'category' => 'Process',
             ],
             [
-                'question' => 'How is patient information protected?',
+                'question' => 'How is sensitive business data protected?',
                 'answer' => 'Access levels per role, activity logs and consent-first processes. We store only the information we '
-                    .'need, and this website never asks you to submit medical details.',
+                    .'need, and this website never asks you to submit confidential customer, employee or patient records.',
                 'category' => 'Security',
             ],
             [

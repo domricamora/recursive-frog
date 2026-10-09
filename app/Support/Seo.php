@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Models\ServiceTier;
 use Illuminate\Support\Str;
 
 /** Builds the metadata bag consumed by the public layout (plan.md #29). */
@@ -39,6 +40,7 @@ class Seo
         $schema = array_filter([
             '@context' => 'https://schema.org',
             '@type' => 'Organization',
+            '@id' => url('/').'#organization',
             'name' => Site::name(),
             'url' => url('/'),
             'email' => Site::email(),
@@ -55,9 +57,49 @@ class Seo
                 'name' => 'Cebu City',
             ],
             'sameAs' => array_values(Site::socialLinks()),
+            'knowsAbout' => [
+                'Website design and development',
+                'Custom business software',
+                'SaaS development',
+                'Workflow automation',
+                'E-commerce',
+                'Booking platforms',
+            ],
         ]);
 
         return $schema;
+    }
+
+    /** @return array<string, mixed> */
+    public static function websiteSchema(): array
+    {
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'WebSite',
+            '@id' => url('/').'#website',
+            'url' => url('/'),
+            'name' => Site::name(),
+            'publisher' => ['@id' => url('/').'#organization'],
+            'inLanguage' => 'en-PH',
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    public static function serviceSchema(ServiceTier $tier): array
+    {
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'Service',
+            'name' => $tier->name,
+            'description' => $tier->short_description ?: $tier->summary,
+            'serviceType' => $tier->includes,
+            'url' => route('services.show', $tier),
+            'provider' => ['@id' => url('/').'#organization'],
+            'areaServed' => [
+                '@type' => 'City',
+                'name' => 'Cebu City',
+            ],
+        ];
     }
 
     /** @param  iterable<int, \App\Models\Faq>  $faqs */

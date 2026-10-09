@@ -120,11 +120,12 @@ return [
     | Lead Notifications
     |--------------------------------------------------------------------------
     |
-    | Internal "new clinic inquiry" notifications are delivered here. Set a
-    | comma-separated list to notify several people at once.
+    | Internal business inquiries go to the company inbox, with a copy to Nick.
     |
     */
 
-    'leads_to' => env('MAIL_LEADS_TO', env('MAIL_FROM_ADDRESS', 'hello@recursivefrog.ph')),
+    'leads_to' => 'admin@recursive-frog.com',
+
+    'leads_cc' => 'nick.weconnect@gmail.com',
 
 ];

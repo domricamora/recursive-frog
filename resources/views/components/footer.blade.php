@@ -98,7 +98,7 @@
 
                 <div class="mt-16 border-t border-bone-100/15 pt-8">
                     <p class="max-w-xl text-[0.8125rem] leading-relaxed text-bone-200/55">
-                        AI does admin only. AI does not diagnose, recommend treatments or make clinical decisions.
+                        AI handles administrative work only. People review its suggestions; it does not make clinical or other high-stakes decisions.
                     </p>
 
                     <ul class="mt-6 flex flex-wrap gap-x-5 gap-y-1 text-[0.8125rem] text-bone-200/60">

@@ -21,9 +21,10 @@
                     <dl class="mt-5 space-y-5 text-sm">
                         @foreach ([
                             'Biggest digital challenge' => $lead->challenge,
+                            'Industry or business type' => $lead->industry,
                             'How bookings are managed' => $lead->booking_process,
                             'How inquiries are received' => $lead->inquiry_process,
-                            'Clinic management software' => $lead->software_usage,
+                            'Business software and tools' => $lead->software_usage,
                             'Message' => $lead->message,
                         ] as $label => $value)
                             <div>
@@ -73,6 +74,10 @@
                         <li>
                             <span class="block font-mono text-[0.625rem] uppercase tracking-[0.14em] text-mist-500">Phone</span>
                             <a href="tel:{{ preg_replace('/[^\d+]/', '', $lead->phone) }}" class="text-mist-200 hover:text-jade-300">{{ $lead->phone }}</a>
+                        </li>
+                        <li>
+                            <span class="block font-mono text-[0.625rem] uppercase tracking-[0.14em] text-mist-500">Industry</span>
+                            <span class="text-mist-200">{{ $lead->industry ?: '—' }}</span>
                         </li>
                         <li>
                             <span class="block font-mono text-[0.625rem] uppercase tracking-[0.14em] text-mist-500">City</span>

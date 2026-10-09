@@ -19,7 +19,7 @@ class LeadInternalNotification extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Recursive Frog clinic inquiry — '.$this->lead->clinic_name,
+            subject: 'New Recursive Frog business inquiry — '.$this->lead->clinic_name,
         );
     }
 

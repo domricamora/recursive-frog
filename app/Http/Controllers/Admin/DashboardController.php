@@ -64,7 +64,7 @@ class DashboardController extends Controller
         $warnings = [];
 
         if (blank(config('mail.leads_to'))) {
-            $warnings[] = ['label' => 'MAIL_LEADS_TO', 'detail' => 'Internal inquiry notifications have no destination.'];
+            $warnings[] = ['label' => 'Lead email recipients', 'detail' => 'Internal inquiry notifications have no destination.'];
         }
 
         if (app()->environment('production') && config('app.debug')) {

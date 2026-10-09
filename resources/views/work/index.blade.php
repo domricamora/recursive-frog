@@ -21,6 +21,6 @@
     </section>
 
     <x-cta-band
-        title="Want something like this for your clinic?"
+        title="Want a system built around your business?"
         copy="Tell us what you are trying to fix and we will tell you honestly which tier — if any — is the right fit." />
 </x-layouts.app>

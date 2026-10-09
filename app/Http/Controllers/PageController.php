@@ -13,7 +13,7 @@ class PageController extends Controller
     {
         return $this->publicView('how-it-works', [
             'title' => 'How It Works',
-            'description' => 'From clinic problems to a working digital system: discovery, planning, design, development, testing and launch.',
+            'description' => 'A clear process for building business websites, custom software and automation: discovery, planning, design, testing and launch.',
         ], [
             'breadcrumbSchema' => Seo::breadcrumbSchema([
                 ['label' => 'Home', 'url' => route('home')],
@@ -26,7 +26,7 @@ class PageController extends Controller
     {
         return $this->publicView('about', [
             'title' => 'About',
-            'description' => 'Recursive Frog builds digital systems for clinics that want more than a brochure website.',
+            'description' => 'Meet the Cebu team building practical websites, custom software and workflow automation for businesses across industries.',
         ], [
             'profiles' => [
                 [
@@ -72,7 +72,7 @@ class PageController extends Controller
 
         return $this->publicView('faq', [
             'title' => 'FAQ',
-            'description' => 'Answers about Recursive Frog services, ownership, clinic software, responsible AI, progress updates and support.',
+            'description' => 'Answers about Recursive Frog services, business software, ownership, responsible AI, progress updates and support.',
         ], [
             'faqs' => $faqs,
             'faqSchema' => $faqs->isNotEmpty() ? Seo::faqSchema($faqs) : null,

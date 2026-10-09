@@ -1,8 +1,8 @@
 <x-layouts.app :seo="$seo">
     <x-page-hero
         eyebrow="Services"
-        title="Choose the system your clinic needs today."
-        copy="Start with the foundation, add software as your operation grows, and introduce automation when it makes sense."
+        title="Digital systems built around your business."
+        copy="Start with a website, connect custom software as your operation grows, and automate repeat work when it makes sense. We work across industries, from hospitality and e-commerce to service businesses."
         :crumbs="['Home' => route('home'), 'Services' => null]" />
 
     <section class="py-16 md:py-20">
